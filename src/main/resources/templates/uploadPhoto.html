@@ -1,0 +1,39 @@
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+
+    <title>Melding lijst</title>
+</head>
+
+<body>
+
+    <h1>Upload new Photo</h1>
+    <form th:action='@{/photos/add}' method='POST' enctype="multipart/form-data">
+        <div class='form-group row'>
+            <div class='col-xs-4'>
+                <label for='melder'>melder : </label>
+                <input type="text" class='form-control' name='melder' id='melder' />
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-xs-4'>
+                <label for='PNummer'>P-nummer : </label>
+                <input type="text" class='form-control' name='PNummer' id='PNummer' />
+            </div>
+        </div>
+        <div class='form-group row'>
+            <div class='col-xs-4'>
+                <label for='image'>Image : </label>
+                <input type="file" class='form-control' name='image' id='image' accept="image/*" multiple="multiple" />
+            </div>
+        </div>
+
+        <input type='SUBMIT' value='Upload'>
+    </form>
+    </div>
+
+</body>
+
+</html>
