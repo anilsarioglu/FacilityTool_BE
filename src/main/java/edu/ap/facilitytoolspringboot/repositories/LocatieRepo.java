@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import edu.ap.facilitytoolspringboot.documenten.Locatie;
+import edu.ap.facilitytoolspringboot.documents.Locatie;
 
 @Repository
 public interface LocatieRepo extends MongoRepository<Locatie, String> {

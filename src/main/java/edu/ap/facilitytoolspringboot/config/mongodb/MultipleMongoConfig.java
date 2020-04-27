@@ -1,4 +1,4 @@
-package edu.ap.facilitytoolspringboot.config;
+package edu.ap.facilitytoolspringboot.config.mongodb;
 
 import com.mongodb.MongoClient;
 

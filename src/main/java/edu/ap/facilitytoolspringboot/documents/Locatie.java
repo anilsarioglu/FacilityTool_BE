@@ -1,16 +1,12 @@
-package edu.ap.facilitytoolspringboot.documenten;
-
-import java.math.BigInteger;
-
-import javax.persistence.Id;
+package edu.ap.facilitytoolspringboot.documents;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "locatie")
 public class Locatie {
 
-    @Id
-    private BigInteger Id;
+    // @Id
+    // private BigInteger Id;
 
     private String campus;
     private Integer verdieping;
@@ -25,14 +21,6 @@ public class Locatie {
         this.verdieping = verdieping;
         this.lokaal = lokaal;
         this.naam = naam;
-    }
-
-    public BigInteger get_id() {
-        return this.Id;
-    }
-
-    public void set_id(BigInteger Id) {
-        this.Id = Id;
     }
 
     public String getCampus() {
