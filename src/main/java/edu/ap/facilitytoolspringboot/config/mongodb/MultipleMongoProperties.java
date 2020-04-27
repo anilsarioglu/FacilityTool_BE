@@ -1,4 +1,4 @@
-package edu.ap.facilitytoolspringboot.config;
+package edu.ap.facilitytoolspringboot.config.mongodb;
 
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;

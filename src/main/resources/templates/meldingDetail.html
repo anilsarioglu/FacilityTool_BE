@@ -10,7 +10,6 @@
 
 <body>
     <div class='card card-body bg-light'>
-        <!-- the question mark after grade ensures that it doesn't crash when grade is null -->
         <h1>
             <p th:text="${melding?.melder} + ' ' + ${melding?.datum} + ' ' + ${melding?.type} + ' ' +
                 ${melding?.locatie} + ' ' +${melding?.beschrijving} + ' ' + ${melding?.locatiebeschr}" />
