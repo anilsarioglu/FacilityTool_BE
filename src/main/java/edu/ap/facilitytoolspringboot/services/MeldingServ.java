@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import edu.ap.facilitytoolspringboot.models.Defect;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +64,27 @@ public class MeldingServ {
     // return mr.save(melding);
     // }
 
+    // Upvoting system
+
+    public Melding toggleUpvote(String id) {
+        Optional<Melding> existingDefect = mr.findById(id);
+
+        if (existingDefect.isPresent()) {
+            Melding _melding = existingDefect.get();
+            boolean isUpvoted = _melding.isUpvoted();
+
+            if (!isUpvoted) {
+                _melding.setUpvoted(true);
+                int incrementedUpvotes = _melding.getNumberUpvotes() + 1;
+                _melding.setNumberUpvotes(incrementedUpvotes);
+            } else {
+                _melding.setUpvoted(false);
+                int decrementedUpvotes = _melding.getNumberUpvotes() - 1;
+                _melding.setNumberUpvotes(decrementedUpvotes);
+            }
+            mr.save(_melding);
+            return _melding;
+        }
+        return null;
+    }
 }
