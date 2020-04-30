@@ -1,4 +1,4 @@
-package edu.ap.facilitytoolspringboot.config;
+package edu.ap.facilitytoolspringboot.config.mongodb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

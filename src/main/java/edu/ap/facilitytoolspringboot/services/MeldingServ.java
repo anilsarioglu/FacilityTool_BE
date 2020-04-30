@@ -1,15 +1,12 @@
 package edu.ap.facilitytoolspringboot.services;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import edu.ap.facilitytoolspringboot.documenten.Melding;
+import edu.ap.facilitytoolspringboot.documents.Melding;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 
 @Service
@@ -22,56 +19,25 @@ public class MeldingServ {
         return mr.findById(id).get();
     }
 
-    public Melding addMeldingService(String melder, String PNummer, String datum, String type, String locatie,
-            String beschrijving, String locatiebeschr) throws IOException {
-
-        Melding melding = new Melding();
-        melding.setMelder(melder);
-        melding.setPNummer(PNummer);
-        melding.setDatum(datum);
-        melding.setType(type);
-        melding.setLocatie(locatie);
-        melding.setBeschrijving(beschrijving);
-        melding.setLocatiebeschr(locatiebeschr);
-
-        return mr.insert(melding);
-    }
-
-    // public Melding addMeldingService(String melder, String PNummer, String datum,
-    // String type, String locatie,
-    // String beschrijving, String locatiebeschr, MultipartFile[] file) throws
-    // IOException {
-
-    // Melding melding = new Melding();
-    // melding.setMelder(melder);
-    // melding.setPNummer(PNummer);
-    // melding.setDatum(datum);
-    // melding.setType(type);
-    // melding.setLocatie(locatie);
-    // melding.setBeschrijving(beschrijving);
-    // melding.setLocatiebeschr(locatiebeschr);
-
-    // for (MultipartFile f : file) {
-    // melding.setImage(new Binary(BsonBinarySubType.BINARY, f.getBytes()));
-    // }
-
-    // return mr.insert(melding);
-    // }
-
     public Melding create(Melding m) {
-        return mr.save(new Melding(m));
+        return mr.save(m);
+        // return mr.save(new Melding(m));
     }
 
     public List<Melding> getAlleMeldingen() {
         return mr.findAll();
     }
 
-    // public Melding getAlleImages(Binary image) {
-    // return mr.findByImage(image);
-    // }
-
     public Melding getMeldingM(String melder) {
         return mr.findByMelder(melder);
+    }
+
+    public List<Melding> getByLocatie(String locatie) {
+        return mr.findByLocatie(locatie);
+    }
+
+    public Optional<Melding> getById(String id) {
+        return mr.findById(id);
     }
 
     public void deleteAll() {
@@ -81,5 +47,38 @@ public class MeldingServ {
     public void delete(String melder) {
         Melding mm = mr.findByMelder(melder);
         mr.delete(mm);
+    }
+
+    public void deleteById(String id) {
+        mr.deleteById(id);
+    }
+
+    // public Melding updateMelding(Melding m) {
+    // Optional<Melding> melding = mr.findById(m.getId());
+    // return mr.save(melding);
+    // }
+
+    // Upvoting system
+
+    public Melding toggleUpvote(String id) {
+        Optional<Melding> existingDefect = mr.findById(id);
+
+        if (existingDefect.isPresent()) {
+            Melding _melding = existingDefect.get();
+            boolean isUpvoted = _melding.isUpvoted();
+
+            if (!isUpvoted) {
+                _melding.setUpvoted(true);
+                int incrementedUpvotes = _melding.getNumberUpvotes() + 1;
+                _melding.setNumberUpvotes(incrementedUpvotes);
+            } else {
+                _melding.setUpvoted(false);
+                int decrementedUpvotes = _melding.getNumberUpvotes() - 1;
+                _melding.setNumberUpvotes(decrementedUpvotes);
+            }
+            mr.save(_melding);
+            return _melding;
+        }
+        return null;
     }
 }
