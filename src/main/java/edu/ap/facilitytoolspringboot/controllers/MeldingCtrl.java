@@ -1,32 +1,18 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
-import java.util.Base64.Encoder;
-import java.util.concurrent.atomic.AtomicLong;
 
-import javax.persistence.PostPersist;
-
-import edu.ap.facilitytoolspringboot.models.Defect;
-import org.bson.Document;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.ap.facilitytoolspringboot.documents.Melding;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 import edu.ap.facilitytoolspringboot.services.MeldingServ;
-import edu.ap.facilitytoolspringboot.models.Status;
 
 @Controller
 @CrossOrigin

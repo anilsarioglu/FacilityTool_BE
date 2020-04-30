@@ -1,19 +1,13 @@
 package edu.ap.facilitytoolspringboot.services;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import edu.ap.facilitytoolspringboot.models.Defect;
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import edu.ap.facilitytoolspringboot.documents.Melding;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
-import edu.ap.facilitytoolspringboot.models.Status;
 
 @Service
 public class MeldingServ {
