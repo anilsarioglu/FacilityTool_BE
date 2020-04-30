@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.PostPersist;
 
+import edu.ap.facilitytoolspringboot.models.Defect;
 import org.bson.Document;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -90,6 +83,19 @@ public class MeldingCtrl {
     @RequestMapping(value = "/meldingJSON/findById/{id}", method = RequestMethod.GET)
     public Optional<Melding> findById(@PathVariable("id") String id) {
         return ms.getById(id);
+    }
+
+    // Upvoting System
+    @PutMapping("/melding/upvote/{id}")
+    public ResponseEntity<Melding> toggleUpvote(@PathVariable("id") String id) {
+        Melding melding = ms.toggleUpvote(id);
+        if (melding != null) {
+            System.out.println("\nAfter\n==================");
+            System.out.println(melding);
+            return new ResponseEntity<>(melding, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // private final AtomicLong counter = new AtomicLong();

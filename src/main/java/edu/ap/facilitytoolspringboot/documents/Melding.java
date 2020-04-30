@@ -38,6 +38,9 @@ public class Melding {
     private String locatie;
     private String beschrijving;
     private String locatiebeschr;
+    // Upvoting system
+    private int numberUpvotes;
+    private boolean isUpvoted;
 
     // @Enumerated(EnumType.STRING)
     private Status status;
@@ -87,6 +90,9 @@ public class Melding {
         this.locatiebeschr = locatiebeschr;
         this.status = status;
         this.photos = photos;
+        // Upvoting system
+        this.numberUpvotes = 0;
+        this.isUpvoted = false;
     }
 
     public Melding(String id, String melder, String pNummer, String datum, String type, String locatie,
@@ -99,6 +105,9 @@ public class Melding {
         this.locatie = locatie;
         this.beschrijving = beschrijving;
         this.locatiebeschr = locatiebeschr;
+        // Upvoting system
+        this.numberUpvotes = 0;
+        this.isUpvoted = false;
     }
 
     public String getId() {
@@ -197,13 +206,40 @@ public class Melding {
         this.photos = photos;
     }
 
+    // Upvoting system
+    public int getNumberUpvotes() {
+        return numberUpvotes;
+    }
+
+    public void setNumberUpvotes(int numberUpvotes) {
+        this.numberUpvotes = numberUpvotes;
+    }
+
+    public boolean isUpvoted() {
+        return isUpvoted;
+    }
+
+    public void setUpvoted(boolean upvoted) {
+        isUpvoted = upvoted;
+    }
+
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", melder='" + getMelder() + "'" + ", pNummer='" + getpNummer() + "'"
-                + ", datum='" + getDatum() + "'" + ", type='" + getType() + "'" + ", locatie='" + getLocatie() + "'"
-                + ", beschrijving='" + getBeschrijving() + "'" + ", locatiebeschr='" + getLocatiebeschr() + "'"
-                + ", status='" + getStatus() + "'" + ", reactie='" + getReactie() + "'" + ", photos='" + getPhotos()
-                + "'" + "}";
+        return "Melding{" +
+                "id='" + id + '\'' +
+                ", melder='" + melder + '\'' +
+                ", pNummer='" + pNummer + '\'' +
+                ", datum='" + datum + '\'' +
+                ", type='" + type + '\'' +
+                ", locatie='" + locatie + '\'' +
+                ", beschrijving='" + beschrijving + '\'' +
+                ", locatiebeschr='" + locatiebeschr + '\'' +
+                ", numberUpvotes=" + numberUpvotes +
+                ", isUpvoted=" + isUpvoted +
+                ", status=" + status +
+                ", reactie=" + reactie +
+                ", photos=" + photos +
+                '}';
     }
 
 }
