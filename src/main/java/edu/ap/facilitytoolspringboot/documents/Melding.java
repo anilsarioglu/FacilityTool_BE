@@ -1,6 +1,7 @@
 package edu.ap.facilitytoolspringboot.documents;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -28,7 +29,7 @@ public class Melding {
 
     private String melder;
     private String pNummer;
-    private String datum;
+    private Date datum;
     private String type;
     private String locatie;
     private String beschrijving;
@@ -64,7 +65,7 @@ public class Melding {
         this.pNummer = pNummer;
     }
 
-    public Melding(String melder, String pNummer, String datum, String type, String locatie, String beschrijving,
+    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String beschrijving,
             String locatiebeschr, Status status, Object photos) {
         this.melder = melder;
         this.pNummer = pNummer;
@@ -77,7 +78,7 @@ public class Melding {
         this.photos = photos;
     }
 
-    public Melding(String id, String melder, String pNummer, String datum, String type, String locatie,
+    public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie,
             String beschrijving, String locatiebeschr) {
         this.id = id;
         this.melder = melder;
@@ -113,11 +114,11 @@ public class Melding {
         this.pNummer = pNummer;
     }
 
-    public String getDatum() {
+    public Date getDatum() {
         return this.datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
 
