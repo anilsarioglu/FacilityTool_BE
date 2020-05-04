@@ -23,11 +23,6 @@ import edu.ap.facilitytoolspringboot.models.Status;
 
 public class Melding {
 
-    // @Id
-    // private String id;
-
-    // private Long counter ;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -46,7 +41,7 @@ public class Melding {
     // @Enumerated(EnumType.STRING)
     private Status status;
 
-    private Object reactie;
+    private List<Reactie> reactie;
 
     @Lob
     private Object photos;
@@ -57,7 +52,6 @@ public class Melding {
 
     public Melding() {
         super();
-        // reactie = new ArrayList<>();
     }
 
     public Melding(Object photos) {
@@ -68,12 +62,6 @@ public class Melding {
         super();
         this.melder = melder;
     }
-
-    // public Melding(String id, List<Object> reactie) {
-    // super();
-    // this.id = id;
-    // this.reactie = reactie;
-    // }
 
     public Melding(String melder, String pNummer) {
         this.melder = melder;
@@ -183,28 +171,28 @@ public class Melding {
         this.status = status;
     }
 
-    public Object getReactie() {
-        return this.reactie;
-    }
-
-    public void setReactie(Object r) {
-        this.reactie = r;
-    }
-
-    // public List<Object> getReactie() {
-    // return this.reactie;
-    // }
-
-    // public void setReactie(Object r) {
-    // reactie.add(r);
-    // }
-
     public Object getPhotos() {
         return this.photos;
     }
 
     public void setPhotos(Object photos) {
         this.photos = photos;
+    }
+
+    public String getPNummer() {
+        return this.pNummer;
+    }
+
+    public void setPNummer(String pNummer) {
+        this.pNummer = pNummer;
+    }
+
+    public List<Reactie> getReactie() {
+        return this.reactie;
+    }
+
+    public void setReactie(List<Reactie> reactie) {
+        this.reactie = reactie;
     }
 
     // Upvoting system
@@ -230,7 +218,7 @@ public class Melding {
                 "id='" + id + '\'' +
                 ", melder='" + melder + '\'' +
                 ", pNummer='" + pNummer + '\'' +
-                ", datum='" + datum + '\'' +
+                ", datum=" + datum +
                 ", type='" + type + '\'' +
                 ", locatie='" + locatie + '\'' +
                 ", beschrijving='" + beschrijving + '\'' +
@@ -242,5 +230,4 @@ public class Melding {
                 ", photos=" + photos +
                 '}';
     }
-
 }
