@@ -27,13 +27,10 @@ public class MeldingServ {
     public void saveReactions(Reactie reactie) {
         // Toont hier volledige melding met ID;
         Optional<Melding> m = mr.findById(reactie.getMessageId());
-
         // Haal specifieke reactie op van die melding;
         List<Reactie> r = m.get().getReactie();
-
         // Voeg die reactie toe;
         r.add(reactie);
-
         // ophalen en opslaan;
         mr.save(m.get());
     }
@@ -68,7 +65,6 @@ public class MeldingServ {
     }
 
     // Upvoting system
-
     public Melding toggleUpvote(String id) {
         Optional<Melding> existingDefect = mr.findById(id);
 
