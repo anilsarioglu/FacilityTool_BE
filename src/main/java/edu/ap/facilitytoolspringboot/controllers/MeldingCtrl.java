@@ -1,18 +1,42 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.Base64.Encoder;
+import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.PostPersist;
+import javax.print.attribute.standard.Media;
+
+import org.bson.Document;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.ap.facilitytoolspringboot.documents.Melding;
+import edu.ap.facilitytoolspringboot.documents.Reactie;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 import edu.ap.facilitytoolspringboot.services.MeldingServ;
+import edu.ap.facilitytoolspringboot.models.Status;
 
 @Controller
 @CrossOrigin
@@ -44,7 +68,12 @@ public class MeldingCtrl {
     @PostMapping(value = "/melding")
     public Melding postMelding(@RequestBody Melding melding) {
         return ms.create(melding);
+    }
 
+    @ResponseBody
+    @PostMapping(value = "/melding/reactie", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void saveReactions(@RequestBody Reactie reactie) {
+        ms.saveReactions(reactie);
     }
 
     @ResponseBody
