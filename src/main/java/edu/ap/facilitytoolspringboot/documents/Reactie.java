@@ -1,29 +1,22 @@
 package edu.ap.facilitytoolspringboot.documents;
 
-import javax.persistence.Id;
+import java.util.Date;
 
 public class Reactie {
 
-    // beter een 'messageId van maken'
-    private String id;
+    private String messageId;
     private String name;
     private String message;
+    private Date datum;
 
     public Reactie() {
     }
 
-    public Reactie(String id, String name, String message) {
-        this.id = id;
+    public Reactie(String messageId, String name, String message, Date datum) {
+        this.messageId = messageId;
         this.name = name;
         this.message = message;
-    }
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.datum = datum;
     }
 
     public String getName() {
@@ -42,9 +35,26 @@ public class Reactie {
         this.message = message;
     }
 
+    public String getMessageId() {
+        return this.messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public Date getDatum() {
+        return this.datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
     @Override
     public String toString() {
-        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", message='" + getMessage() + "'" + "}";
+        return "{" + " messageId='" + getMessageId() + "'" + ", name='" + getName() + "'" + ", message='" + getMessage()
+                + "'" + ", datum='" + getDatum() + "'" + "}";
     }
 
 }
