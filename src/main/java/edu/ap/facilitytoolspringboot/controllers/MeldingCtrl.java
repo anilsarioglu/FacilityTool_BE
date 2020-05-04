@@ -105,28 +105,4 @@ public class MeldingCtrl {
         }
     }
 
-    // private final AtomicLong counter = new AtomicLong();
-
-    // @RequestMapping(value = "/update/{a}", method = RequestMethod.POST)
-    // public Melding meldingInsert(@RequestBody Melding m) {
-    // return mr.save(new Melding(m.getId(), m.getReactie()));
-    // }
-
-    // @ResponseBody
-    // @RequestMapping(value = "/meldingJSON/update", method = RequestMethod.GET)
-    // public String update(@RequestBody Melding m) {
-    // Melding melding = ms.updateMelding(m);
-    // return melding.toString();
-    // }
-
-    // @ResponseBody
-    // @RequestMapping(value = "meldingJSON/update/{id}", method =
-    // RequestMethod.PATCH)
-    // public Melding update(@PathVariable(value = "id") String id, @RequestBody
-    // Melding myDocument) {
-    // myDocument.setId(id);
-    // return mr.save(myDocument);
-
-    // }
-
 }
