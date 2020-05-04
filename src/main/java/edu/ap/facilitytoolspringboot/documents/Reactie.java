@@ -12,6 +12,12 @@ public class Reactie {
     public Reactie() {
     }
 
+    public Reactie(String messageId, String name, String message) {
+        this.messageId = messageId;
+        this.name = name;
+        this.message = message;
+    }
+
     public Reactie(String messageId, String name, String message, Date datum) {
         this.messageId = messageId;
         this.name = name;
