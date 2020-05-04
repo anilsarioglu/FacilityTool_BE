@@ -218,7 +218,7 @@ public class Melding {
                 "id='" + id + '\'' +
                 ", melder='" + melder + '\'' +
                 ", pNummer='" + pNummer + '\'' +
-                ", datum='" + datum + '\'' +
+                ", datum=" + datum +
                 ", type='" + type + '\'' +
                 ", locatie='" + locatie + '\'' +
                 ", beschrijving='" + beschrijving + '\'' +
@@ -229,11 +229,5 @@ public class Melding {
                 ", reactie=" + reactie +
                 ", photos=" + photos +
                 '}';
-        /*return "{" + " id='" + getId() + "'" + ", melder='" + getMelder() + "'" + ", pNummer='" + getPNummer() + "'"
-                + ", datum='" + getDatum() + "'" + ", type='" + getType() + "'" + ", locatie='" + getLocatie() + "'"
-                + ", beschrijving='" + getBeschrijving() + "'" + ", locatiebeschr='" + getLocatiebeschr() + "'"
-                + ", status='" + getStatus() + "'" + ", reactie='" + getReactie() + "'" + ", photos='" + getPhotos()
-                + "'" + "}";*/
     }
-
 }
