@@ -67,11 +67,6 @@ public class MeldingServ {
         mr.deleteById(id);
     }
 
-    // public Melding updateMelding(Melding m) {
-    // Optional<Melding> melding = mr.findById(m.getId());
-    // return mr.save(melding);
-    // }
-
     // Upvoting system
 
     public Melding toggleUpvote(String id) {
