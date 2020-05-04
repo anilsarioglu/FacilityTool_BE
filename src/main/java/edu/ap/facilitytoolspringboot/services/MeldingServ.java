@@ -31,39 +31,17 @@ public class MeldingServ {
 
     public void saveReactions(Reactie reactie) {
         // Toont hier volledige melding met ID;
-        Optional<Melding> m = mr.findById(reactie.getId());
+        Optional<Melding> m = mr.findById(reactie.getMessageId());
 
         // Haal specifieke reactie op van die melding;
         List<Reactie> r = m.get().getReactie();
+
+        // Voeg die reactie toe;
         r.add(reactie);
 
-        // System.out.println(m);
+        // ophalen en opslaan;
         mr.save(m.get());
     }
-
-    // public void saveReactions(Melding melding) {
-    // Optional<Melding> m = mr.findById(melding.getId());
-    // List<Reactie> reactie = melding.getReactie();
-    // m.get().setReactie(reactie);
-    // mr.save(melding);
-
-    // List<Reactie> reactie = melding.getReactie();
-    // melding.setReactie(reactie);
-    // mr.save(m);
-
-    // mr.findById(m.getId());
-    // List<Reactie> reactie = new ArrayList<>();
-    // reactie.add(m.get)
-    // m.setReactie(m.getReactie());
-    // m.getReactie();
-    // mr.findById(m.getId());
-    // List<Reactie> r = m.getReactie();
-    // m.setReactie(r);
-
-    // }
-
-    // Optional<Melding> melding = mr.findById(m.getId());
-    // return mr.save(melding);
 
     public List<Melding> getAlleMeldingen() {
         return mr.findAll();
