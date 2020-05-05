@@ -10,13 +10,15 @@ import lombok.Data;
 public class MultipleMongoProperties {
     private MongoProperties locatie = new MongoProperties();
     private MongoProperties melding = new MongoProperties();
+    private MongoProperties category = new MongoProperties();
 
     public MultipleMongoProperties() {
     }
 
-    public MultipleMongoProperties(MongoProperties location, MongoProperties melding) {
+    public MultipleMongoProperties(MongoProperties location, MongoProperties melding, MongoProperties category) {
         this.locatie = location;
         this.melding = melding;
+        this.category = category;
     }
 
     public MongoProperties getLocation() {
@@ -35,9 +37,17 @@ public class MultipleMongoProperties {
         this.melding = melding;
     }
 
+    public MongoProperties getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(MongoProperties category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
-        return "{" + " locatie='" + getLocation() + "'" + ", melding='" + getMelding() + "'" + "}";
+        return "{" + " locatie='" + getLocation() + "'" + ", melding='" + getMelding() + "'" + ", category='" + getCategory() +  "}";
     }
 
 }
