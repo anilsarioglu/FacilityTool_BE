@@ -10,8 +10,5 @@ import edu.ap.facilitytoolspringboot.documents.Category;
 @Repository
 public interface CategoryRepo extends MongoRepository<Category, String> {
 
-    public List<Category> findByName(String name);
-
-    public List<Category> findByType(String type);
-
+    public Category findByName(String name);
 }

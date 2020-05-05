@@ -14,20 +14,16 @@ public class CategoryServ {
     @Autowired
     private CategoryRepo cr;
 
-    public Category create(String name, String type) {
-        return cr.save(new Category(name, type));
+    public Category create(String name, String description) {
+        return cr.save(new Category(name, description));
     }
 
     public List<Category> getAll() {
         return cr.findAll();
     }
 
-    public List<Category> getByName(String name) {
-        return cr.findByName(name);
+    public void deleteByName(String name) {
+        Category c = cr.findByName(name);
+        cr.delete(c);
     }
-
-    public List<Category> getByType(String type) {
-        return cr.findByType(type);
-    }
-
 }

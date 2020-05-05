@@ -65,7 +65,6 @@ public class MeldingCtrl {
     @PostMapping(value = "/melding")
     public Melding postMelding(@RequestBody Melding melding) {
         return ms.create(melding);
-
     }
 
     @ResponseBody
