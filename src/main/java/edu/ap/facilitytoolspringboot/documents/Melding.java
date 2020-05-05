@@ -32,6 +32,7 @@ public class Melding {
     private Date datum;
     private String type;
     private String locatie;
+    private String category;
     private String beschrijving;
     private String locatiebeschr;
     // Upvoting system
@@ -68,13 +69,14 @@ public class Melding {
         this.pNummer = pNummer;
     }
 
-    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String beschrijving,
+    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String category, String beschrijving,
             String locatiebeschr, Status status, Object photos) {
         this.melder = melder;
         this.pNummer = pNummer;
         this.datum = datum;
         this.type = type;
         this.locatie = locatie;
+        this.category = category;
         this.beschrijving = beschrijving;
         this.locatiebeschr = locatiebeschr;
         this.status = status;
@@ -84,7 +86,7 @@ public class Melding {
         this.isUpvoted = false;
     }
 
-    public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie,
+    public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie, String category,
             String beschrijving, String locatiebeschr) {
         this.id = id;
         this.melder = melder;
@@ -92,6 +94,7 @@ public class Melding {
         this.datum = datum;
         this.type = type;
         this.locatie = locatie;
+        this.category = category;
         this.beschrijving = beschrijving;
         this.locatiebeschr = locatiebeschr;
         // Upvoting system
@@ -145,6 +148,14 @@ public class Melding {
 
     public void setLocatie(String locatie) {
         this.locatie = locatie;
+    }
+
+    public String getCatgeory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getBeschrijving() {

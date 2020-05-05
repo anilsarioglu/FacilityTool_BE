@@ -35,20 +35,14 @@ public class CategoryCtrl {
         return cr.findAll();
     }
 
-    @GetMapping("/findByName/{name}")
-    public List<Category> findByName(@PathVariable("name") String name) {
-        return cr.findByName(name);
-    }
-
-    @GetMapping("/findByType/{type}")
-    public List<Category> findByType(@PathVariable("type") String type) {
-        return csrv.getByType(type);
-    }
-
     @PostMapping(value = "/addCategory")
     public void postMelding(@RequestBody Category category) {
         cr.save(category);
     }
 
-    
+    @ResponseBody
+    @RequestMapping(value = "/category/deleteByName/{name}", method = RequestMethod.GET)
+    public void deleteByNameParam(@PathVariable("name") String name) {
+        csrv.deleteByName(name);
+    }
 }
