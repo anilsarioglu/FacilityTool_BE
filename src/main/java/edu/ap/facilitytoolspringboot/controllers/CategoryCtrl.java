@@ -40,9 +40,12 @@ public class CategoryCtrl {
         cr.save(category);
     }
 
+
+
     @ResponseBody
     @RequestMapping(value = "/category/deleteByName/{name}", method = RequestMethod.GET)
     public void deleteByNameParam(@PathVariable("name") String name) {
         csrv.deleteByName(name);
     }
+
 }
