@@ -25,11 +25,19 @@ public class MultipleMongoConfig {
         return new MongoTemplate(meldingFactory(this.mongoProperties.getMelding()));
     }
 
+    public MongoTemplate categoryMongoTemplate() throws Exception {
+        return new MongoTemplate(categoryFactory(this.mongoProperties.getCategory()));
+    }
+
     public MongoDbFactory locatieFactory(final MongoProperties mongo) throws Exception {
         return (MongoDbFactory) new MongoClient("127.0.0.1", 27017);
     }
 
     public MongoDbFactory meldingFactory(final MongoProperties mongo) throws Exception {
+        return (MongoDbFactory) new MongoClient("127.0.0.1", 27017);
+    }
+
+    public MongoDbFactory categoryFactory(final MongoProperties mongo) throws Exception {
         return (MongoDbFactory) new MongoClient("127.0.0.1", 27017);
     }
 

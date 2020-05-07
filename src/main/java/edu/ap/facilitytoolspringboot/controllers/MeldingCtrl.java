@@ -1,18 +1,34 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
+import java.util.Base64.Encoder;
+import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.PostPersist;
+import javax.print.attribute.standard.Media;
+
+import org.bson.Document;
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.ap.facilitytoolspringboot.documents.Melding;
+import edu.ap.facilitytoolspringboot.documents.Reactie;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 import edu.ap.facilitytoolspringboot.services.MeldingServ;
+import edu.ap.facilitytoolspringboot.models.Status;
 
 @Controller
 @CrossOrigin
@@ -44,7 +60,12 @@ public class MeldingCtrl {
     @PostMapping(value = "/melding")
     public Melding postMelding(@RequestBody Melding melding) {
         return ms.create(melding);
+    }
 
+    @ResponseBody
+    @PostMapping(value = "/melding/reactie", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void saveReactions(@RequestBody Reactie reactie) {
+        ms.saveReactions(reactie);
     }
 
     @ResponseBody
@@ -83,29 +104,5 @@ public class MeldingCtrl {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    // private final AtomicLong counter = new AtomicLong();
-
-    // @RequestMapping(value = "/update/{a}", method = RequestMethod.POST)
-    // public Melding meldingInsert(@RequestBody Melding m) {
-    // return mr.save(new Melding(m.getId(), m.getReactie()));
-    // }
-
-    // @ResponseBody
-    // @RequestMapping(value = "/meldingJSON/update", method = RequestMethod.GET)
-    // public String update(@RequestBody Melding m) {
-    // Melding melding = ms.updateMelding(m);
-    // return melding.toString();
-    // }
-
-    // @ResponseBody
-    // @RequestMapping(value = "meldingJSON/update/{id}", method =
-    // RequestMethod.PATCH)
-    // public Melding update(@PathVariable(value = "id") String id, @RequestBody
-    // Melding myDocument) {
-    // myDocument.setId(id);
-    // return mr.save(myDocument);
-
-    // }
 
 }

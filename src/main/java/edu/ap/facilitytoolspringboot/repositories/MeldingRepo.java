@@ -16,6 +16,8 @@ public interface MeldingRepo extends MongoRepository<Melding, String> {
 
     public List<Melding> findByLocatie(String locatie);
 
+    public List<Melding> findByCategory(String category);
+
     // public Melding save(Optional<Melding> m);
 
     // public Melding findByImage(Binary image);

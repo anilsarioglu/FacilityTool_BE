@@ -1,6 +1,7 @@
 package edu.ap.facilitytoolspringboot.documents;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -22,20 +23,16 @@ import edu.ap.facilitytoolspringboot.models.Status;
 
 public class Melding {
 
-    // @Id
-    // private String id;
-
-    // private Long counter ;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String melder;
     private String pNummer;
-    private String datum;
+    private Date datum;
     private String type;
     private String locatie;
+    private String category;
     private String beschrijving;
     private String locatiebeschr;
     // Upvoting system
@@ -45,7 +42,7 @@ public class Melding {
     // @Enumerated(EnumType.STRING)
     private Status status;
 
-    private Object reactie;
+    private List<Reactie> reactie;
 
     @Lob
     private Object photos;
@@ -56,7 +53,6 @@ public class Melding {
 
     public Melding() {
         super();
-        // reactie = new ArrayList<>();
     }
 
     public Melding(Object photos) {
@@ -68,24 +64,19 @@ public class Melding {
         this.melder = melder;
     }
 
-    // public Melding(String id, List<Object> reactie) {
-    // super();
-    // this.id = id;
-    // this.reactie = reactie;
-    // }
-
     public Melding(String melder, String pNummer) {
         this.melder = melder;
         this.pNummer = pNummer;
     }
 
-    public Melding(String melder, String pNummer, String datum, String type, String locatie, String beschrijving,
+    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String category, String beschrijving,
             String locatiebeschr, Status status, Object photos) {
         this.melder = melder;
         this.pNummer = pNummer;
         this.datum = datum;
         this.type = type;
         this.locatie = locatie;
+        this.category = category;
         this.beschrijving = beschrijving;
         this.locatiebeschr = locatiebeschr;
         this.status = status;
@@ -95,7 +86,7 @@ public class Melding {
         this.isUpvoted = false;
     }
 
-    public Melding(String id, String melder, String pNummer, String datum, String type, String locatie,
+    public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie, String category,
             String beschrijving, String locatiebeschr) {
         this.id = id;
         this.melder = melder;
@@ -103,6 +94,7 @@ public class Melding {
         this.datum = datum;
         this.type = type;
         this.locatie = locatie;
+        this.category = category;
         this.beschrijving = beschrijving;
         this.locatiebeschr = locatiebeschr;
         // Upvoting system
@@ -134,11 +126,11 @@ public class Melding {
         this.pNummer = pNummer;
     }
 
-    public String getDatum() {
+    public Date getDatum() {
         return this.datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
 
@@ -156,6 +148,14 @@ public class Melding {
 
     public void setLocatie(String locatie) {
         this.locatie = locatie;
+    }
+
+    public String getCatgeory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getBeschrijving() {
@@ -182,28 +182,28 @@ public class Melding {
         this.status = status;
     }
 
-    public Object getReactie() {
-        return this.reactie;
-    }
-
-    public void setReactie(Object r) {
-        this.reactie = r;
-    }
-
-    // public List<Object> getReactie() {
-    // return this.reactie;
-    // }
-
-    // public void setReactie(Object r) {
-    // reactie.add(r);
-    // }
-
     public Object getPhotos() {
         return this.photos;
     }
 
     public void setPhotos(Object photos) {
         this.photos = photos;
+    }
+
+    public String getPNummer() {
+        return this.pNummer;
+    }
+
+    public void setPNummer(String pNummer) {
+        this.pNummer = pNummer;
+    }
+
+    public List<Reactie> getReactie() {
+        return this.reactie;
+    }
+
+    public void setReactie(List<Reactie> reactie) {
+        this.reactie = reactie;
     }
 
     // Upvoting system
@@ -229,7 +229,7 @@ public class Melding {
                 "id='" + id + '\'' +
                 ", melder='" + melder + '\'' +
                 ", pNummer='" + pNummer + '\'' +
-                ", datum='" + datum + '\'' +
+                ", datum=" + datum +
                 ", type='" + type + '\'' +
                 ", locatie='" + locatie + '\'' +
                 ", beschrijving='" + beschrijving + '\'' +
@@ -241,5 +241,4 @@ public class Melding {
                 ", photos=" + photos +
                 '}';
     }
-
 }

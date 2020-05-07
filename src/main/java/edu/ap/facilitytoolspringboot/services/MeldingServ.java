@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.ap.facilitytoolspringboot.documents.Melding;
+import edu.ap.facilitytoolspringboot.documents.Reactie;
 import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 
 @Service
@@ -21,7 +22,17 @@ public class MeldingServ {
 
     public Melding create(Melding m) {
         return mr.save(m);
-        // return mr.save(new Melding(m));
+    }
+
+    public void saveReactions(Reactie reactie) {
+        // Toont hier volledige melding met ID;
+        Optional<Melding> m = mr.findById(reactie.getMessageId());
+        // Haal specifieke reactie op van die melding;
+        List<Reactie> r = m.get().getReactie();
+        // Voeg die reactie toe;
+        r.add(reactie);
+        // ophalen en opslaan;
+        mr.save(m.get());
     }
 
     public List<Melding> getAlleMeldingen() {
@@ -53,13 +64,7 @@ public class MeldingServ {
         mr.deleteById(id);
     }
 
-    // public Melding updateMelding(Melding m) {
-    // Optional<Melding> melding = mr.findById(m.getId());
-    // return mr.save(melding);
-    // }
-
     // Upvoting system
-
     public Melding toggleUpvote(String id) {
         Optional<Melding> existingDefect = mr.findById(id);
 
