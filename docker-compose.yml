@@ -4,7 +4,6 @@ services:
     reverseproxy:
         # image: nginx #
         build: frontend
-        #build: facilitytoolionic
         container_name: proxy
         ports:
            - 0.0.0.0:80:80
