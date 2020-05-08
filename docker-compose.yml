@@ -3,8 +3,8 @@ version: '3'
 services:
     reverseproxy:
         # image: nginx #
-        #build: frontend
-        build: facilitytoolionic
+        build: frontend
+        #build: facilitytoolionic
         container_name: proxy
         ports:
            - 0.0.0.0:80:80
