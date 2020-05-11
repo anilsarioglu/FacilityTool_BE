@@ -11,9 +11,9 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
+import edu.ap.facilitytoolspringboot.repositories.ReportRepository;
 
-@EnableMongoRepositories(basePackageClasses = MeldingRepo.class)
+@EnableMongoRepositories(basePackageClasses = ReportRepository.class)
 @Configuration
 public class MongoDBConfigMelding {
 

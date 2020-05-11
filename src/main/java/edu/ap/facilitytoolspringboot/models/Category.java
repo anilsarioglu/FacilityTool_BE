@@ -1,12 +1,16 @@
-package edu.ap.facilitytoolspringboot.documents;
+package edu.ap.facilitytoolspringboot.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Document(collection = "category")
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     private String name;

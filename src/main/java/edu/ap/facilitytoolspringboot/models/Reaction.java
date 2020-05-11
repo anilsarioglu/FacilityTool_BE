@@ -1,24 +1,24 @@
-package edu.ap.facilitytoolspringboot.documents;
+package edu.ap.facilitytoolspringboot.models;
 
 import java.util.Date;
 
-public class Reactie {
+public class Reaction {
 
     private String messageId;
     private String name;
     private String message;
     private Date datum;
 
-    public Reactie() {
+    public Reaction() {
     }
 
-    public Reactie(String messageId, String name, String message) {
+    public Reaction(String messageId, String name, String message) {
         this.messageId = messageId;
         this.name = name;
         this.message = message;
     }
 
-    public Reactie(String messageId, String name, String message, Date datum) {
+    public Reaction(String messageId, String name, String message, Date datum) {
         this.messageId = messageId;
         this.name = name;
         this.message = message;
