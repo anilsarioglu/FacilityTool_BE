@@ -13,8 +13,13 @@ import edu.ap.facilitytoolspringboot.repositories.MeldingRepo;
 @Service
 public class MeldingServ {
 
+    //@Autowired
+    private final MeldingRepo mr;
+
     @Autowired
-    private MeldingRepo mr;
+    public MeldingServ(MeldingRepo mr) {
+        this.mr = mr;
+    }
 
     public Melding getMelding(String id) {
         return mr.findById(id).get();
