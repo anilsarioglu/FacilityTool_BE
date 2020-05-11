@@ -5,12 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.persistence.Convert;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 import org.bson.types.Binary;
 import org.hibernate.annotations.DynamicUpdate;
@@ -60,9 +55,10 @@ public class Melding {
     }
 
     public Melding(String melder) {
-        super();
+        //super();
         this.melder = melder;
     }
+
 
     public Melding(String melder, String pNummer) {
         this.melder = melder;
@@ -85,6 +81,23 @@ public class Melding {
         this.numberUpvotes = 0;
         this.isUpvoted = false;
     }
+
+
+    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String category,
+                   String beschrijving, String locatiebeschr) {
+        this.melder = melder;
+        this.pNummer = pNummer;
+        this.datum = datum;
+        this.type = type;
+        this.locatie = locatie;
+        this.category = category;
+        this.beschrijving = beschrijving;
+        this.locatiebeschr = locatiebeschr;
+        // Upvoting system
+        this.numberUpvotes = 0;
+        this.isUpvoted = false;
+    }
+
 
     public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie, String category,
             String beschrijving, String locatiebeschr) {
