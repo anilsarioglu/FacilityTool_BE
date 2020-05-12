@@ -10,7 +10,7 @@ import edu.ap.facilitytoolspringboot.repositories.LocationRepository;
 
 @Service
 public class LocationService {
-    private final LocationRepository locationRepository;
+    private LocationRepository locationRepository;
 
     @Autowired
     public LocationService(LocationRepository locationRepository) {

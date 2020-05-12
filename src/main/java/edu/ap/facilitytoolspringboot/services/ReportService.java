@@ -12,7 +12,7 @@ import edu.ap.facilitytoolspringboot.repositories.ReportRepository;
 
 @Service
 public class ReportService {
-    private final ReportRepository reportRepository;
+    private ReportRepository reportRepository;
 
     @Autowired
     public ReportService(ReportRepository reportRepository) {
