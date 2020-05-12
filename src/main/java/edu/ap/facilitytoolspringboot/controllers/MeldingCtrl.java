@@ -57,7 +57,7 @@ public class MeldingCtrl {
     }
 
     @ResponseBody
-    @PostMapping(value = "/melding")
+    @PostMapping(value = "/melding",produces = MediaType.APPLICATION_JSON_VALUE)
     public Melding postMelding(@RequestBody Melding melding) {
         return ms.create(melding);
     }
