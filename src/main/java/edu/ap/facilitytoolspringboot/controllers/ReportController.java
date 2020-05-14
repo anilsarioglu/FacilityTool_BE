@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +34,7 @@ public class ReportController {
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getAll() {
         try {
-            List<Report> reports = reportService.getAll();
+            List<Report> reports = reportService.getAllReports();
             if (reports.isEmpty()) {
                 LOG.info("There are no reports to return");
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

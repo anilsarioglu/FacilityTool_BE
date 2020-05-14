@@ -33,7 +33,7 @@ public class ReportService {
         return reaction;
     }
 
-    public List<Report> getAll() {
+    public List<Report> getAllReports() {
         return reportRepository.findAll();
     }
 
