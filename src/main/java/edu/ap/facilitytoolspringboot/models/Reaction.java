@@ -7,7 +7,7 @@ public class Reaction {
     private String messageId;
     private String name;
     private String message;
-    private Date datum;
+    private Date date;
 
     public Reaction() {
     }
@@ -18,11 +18,11 @@ public class Reaction {
         this.message = message;
     }
 
-    public Reaction(String messageId, String name, String message, Date datum) {
+    public Reaction(String messageId, String name, String message, Date date) {
         this.messageId = messageId;
         this.name = name;
         this.message = message;
-        this.datum = datum;
+        this.date = date;
     }
 
     public String getName() {
@@ -49,18 +49,18 @@ public class Reaction {
         this.messageId = messageId;
     }
 
-    public Date getDatum() {
-        return this.datum;
+    public Date getDate() {
+        return this.date;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "{" + " messageId='" + getMessageId() + "'" + ", name='" + getName() + "'" + ", message='" + getMessage()
-                + "'" + ", datum='" + getDatum() + "'" + "}";
+                + "'" + ", datum='" + getDate() + "'" + "}";
     }
 
 }
