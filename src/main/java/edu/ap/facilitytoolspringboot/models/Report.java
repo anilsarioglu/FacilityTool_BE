@@ -105,16 +105,16 @@ public class Report {
         this.reporter = reporter;
     }
 
-    public String getPNumber() {
-        return this.pNumber;
+    public String getpNumber() {
+        return pNumber;
     }
 
-    public void setPNumber(String pNumber) {
+    public void setpNumber(String pNumber) {
         this.pNumber = pNumber;
     }
 
     public Date getDate() {
-        return this.date;
+        return date;
     }
 
     public void setDate(Date date) {
@@ -122,7 +122,7 @@ public class Report {
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public void setType(String type) {
@@ -130,7 +130,7 @@ public class Report {
     }
 
     public String getLocation() {
-        return this.location;
+        return location;
     }
 
     public void setLocation(String location) {
@@ -138,7 +138,7 @@ public class Report {
     }
 
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     public void setCategory(String category) {
@@ -146,7 +146,7 @@ public class Report {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -154,7 +154,7 @@ public class Report {
     }
 
     public String getLocationDescription() {
-        return this.locationDescription;
+        return locationDescription;
     }
 
     public void setLocationDescription(String locationDescription) {
@@ -162,27 +162,27 @@ public class Report {
     }
 
     public Status getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Reaction> reactions) {
+        this.reactions = reactions;
+    }
+
     public Object getPhotos() {
-        return this.photos;
+        return photos;
     }
 
     public void setPhotos(Object photos) {
         this.photos = photos;
-    }
-
-    public List<Reaction> getReactions() {
-        return this.reactions;
-    }
-
-    public void setReactions(List<Reaction> reaction) {
-        this.reactions = reaction;
     }
 
     // Upvoting system

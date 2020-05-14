@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -96,10 +97,10 @@ public class ReportController {
     public ResponseEntity<Reaction> postReaction(@PathVariable("id") String id, @RequestBody Reaction reaction) {
         try {
             Reaction rea = reportService.saveReactions(id, reaction);
-            LOG.info("Added a new reaction to the report with id: {}", id);
+            LOG.info("Added a new reaction to the report with id:");
             return new ResponseEntity<>(rea, HttpStatus.CREATED);
         } catch (Exception e) {
-            LOG.error("Couldn't add a new reaction to the report with id: {}", id, e);
+            LOG.error("Couldn't add a new reaction to the report with id:", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
