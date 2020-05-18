@@ -1,28 +1,28 @@
-package edu.ap.facilitytoolspringboot.documents;
+package edu.ap.facilitytoolspringboot.models;
 
 import java.util.Date;
 
-public class Reactie {
+public class Reaction {
 
     private String messageId;
     private String name;
     private String message;
-    private Date datum;
+    private Date date;
 
-    public Reactie() {
+    public Reaction() {
     }
 
-    public Reactie(String messageId, String name, String message) {
+    public Reaction(String messageId, String name, String message) {
         this.messageId = messageId;
         this.name = name;
         this.message = message;
     }
 
-    public Reactie(String messageId, String name, String message, Date datum) {
+    public Reaction(String messageId, String name, String message, Date date) {
         this.messageId = messageId;
         this.name = name;
         this.message = message;
-        this.datum = datum;
+        this.date = date;
     }
 
     public String getName() {
@@ -49,18 +49,18 @@ public class Reactie {
         this.messageId = messageId;
     }
 
-    public Date getDatum() {
-        return this.datum;
+    public Date getDate() {
+        return this.date;
     }
 
-    public void setDatum(Date datum) {
-        this.datum = datum;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "{" + " messageId='" + getMessageId() + "'" + ", name='" + getName() + "'" + ", message='" + getMessage()
-                + "'" + ", datum='" + getDatum() + "'" + "}";
+                + "'" + ", datum='" + getDate() + "'" + "}";
     }
 
 }
