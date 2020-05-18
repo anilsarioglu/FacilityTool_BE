@@ -33,6 +33,7 @@ public class Melding {
     private String type;
     private String locatie;
     private String category;
+    private Date requestDate;
     private String beschrijving;
     private String locatiebeschr;
     // Upvoting system
@@ -86,6 +87,25 @@ public class Melding {
         this.isUpvoted = false;
     }
 
+    //Create task with pictures
+    public Melding(String melder, String pNummer, Date datum, String type, String locatie, String category, Date requestDate, String beschrijving,
+    String locatiebeschr, Status status, Object photos) {
+        this.melder = melder;
+        this.pNummer = pNummer;
+        this.datum = datum;
+        this.type = type;
+        this.locatie = locatie;
+        this.category = category;
+        this.requestDate = requestDate;
+        this.beschrijving = beschrijving;
+        this.locatiebeschr = locatiebeschr;
+        this.status = status;
+        this.photos = photos;
+        // Upvoting system
+        this.numberUpvotes = 0;
+        this.isUpvoted = false;
+    }
+
     public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie, String category,
             String beschrijving, String locatiebeschr) {
         this.id = id;
@@ -101,6 +121,24 @@ public class Melding {
         this.numberUpvotes = 0;
         this.isUpvoted = false;
     }
+
+    //Create task without pictures
+    public Melding(String id, String melder, String pNummer, Date datum, String type, String locatie, String category, Date requestDate,
+    String beschrijving, String locatiebeschr) {
+        this.id = id;
+        this.melder = melder;
+        this.pNummer = pNummer;
+        this.datum = datum;
+        this.type = type;
+        this.locatie = locatie;
+        this.category = category;
+        this.requestDate = requestDate;
+        this.beschrijving = beschrijving;
+        this.locatiebeschr = locatiebeschr;
+        // Upvoting system
+        this.numberUpvotes = 0;
+        this.isUpvoted = false;
+}
 
     public String getId() {
         return id;
@@ -156,6 +194,14 @@ public class Melding {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Date getRequestDate() {
+        return this.requestDate;
+    }
+
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
     }
 
     public String getBeschrijving() {
