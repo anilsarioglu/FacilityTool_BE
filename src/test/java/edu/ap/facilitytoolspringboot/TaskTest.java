@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-public class DefectTest {
+public class TaskTest {
     @MockBean
     ReportRepository mockReportRepository = Mockito.mock(ReportRepository.class);
 
@@ -35,14 +35,12 @@ public class DefectTest {
 
     @Before
     public void setUp() {
-        report = new Report("Ariana Grande", "P106204");
-        reportList = new ArrayList<>();
-        reportList.add(new Report("Selena Gomez", "P105106"));
-        reportList.add(new Report("Ariana Grande", "P106809"));
+        report = new Report("Test Name", "P000001");
     }
 
+    //Task created test
     @Test
-    public void countDefect(){
+    public void checkTaskCreated(){
         //arrange
         int count = (int) mockReportRepository.count();
 
@@ -53,17 +51,6 @@ public class DefectTest {
 
         //assert
         assertEquals(count, count2);
-    }
-
-    @Test
-    public void findAddedMeldingen() {
-
-        //act
-        when(mockReportRepository.findAll()).thenReturn(reportList);
-        List<Report> expectedList = reportSystemUnderTest.getAllReports();
-
-        //assert
-        assertEquals(2, expectedList.size());
     }
 
     @org.springframework.context.annotation.Configuration
