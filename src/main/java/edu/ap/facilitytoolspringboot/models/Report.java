@@ -21,6 +21,7 @@ public class Report {
     private String pNumber;
     private Date date;
     private String type;
+    private Date requestDate;
     private String location;
     private String category;
     private String description;
@@ -56,12 +57,13 @@ public class Report {
         this.pNumber = pNumber;
     }
 
-    public Report(String reporter, String pNumber, Date date, String type, String location, String category, String description,
+    public Report(String reporter, String pNumber, Date date, String type, Date requestDate, String location, String category, String description,
                   String locationDescription, Status status, Object photos) {
         this.reporter = reporter;
         this.pNumber = pNumber;
         this.date = date;
         this.type = type;
+        this.requestDate = requestDate;
         this.location = location;
         this.category = category;
         this.description = description;
@@ -73,13 +75,14 @@ public class Report {
         this.isUpvoted = false;
     }
 
-    public Report(String id, String reporter, String pNumber, Date date, String type, String location, String category,
+    public Report(String id, String reporter, String pNumber, Date date, Date requestDate, String type, String location, String category,
                   String description, String locationDescription) {
         this.id = id;
         this.reporter = reporter;
         this.pNumber = pNumber;
         this.date = date;
         this.type = type;
+        this.requestDate = requestDate;
         this.location = location;
         this.category = category;
         this.description = description;
@@ -127,6 +130,14 @@ public class Report {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Date getRequestDate(){
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate){
+        this.requestDate = requestDate;
     }
 
     public String getLocation() {
@@ -210,6 +221,7 @@ public class Report {
                 ", pNumber='" + pNumber + '\'' +
                 ", date=" + date +
                 ", type='" + type + '\'' +
+                ", requestDate='" + requestDate + '\'' +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +
