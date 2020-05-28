@@ -73,6 +73,18 @@ public class EmergencyController {
         }
     }
 
+   @DeleteMapping("/emergencies/{id}")
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable("id") String id) {
+        try {
+            emergencyService.deleteById(id);
+            LOG.info("Emergency with id: {} removed successfully", id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            LOG.error("Couldn't remove the Emergency with id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
 
 
 
