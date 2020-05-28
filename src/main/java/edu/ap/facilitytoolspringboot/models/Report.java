@@ -40,7 +40,7 @@ public class Report {
     private Object photos;
 
     public Report() {
-        super();
+        
     }
 
     public Report(Object photos) {
@@ -66,6 +66,7 @@ public class Report {
         this.requestDate = requestDate;
         this.location = location;
         this.category = category;
+        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         this.status = status;
@@ -85,6 +86,7 @@ public class Report {
         this.requestDate = requestDate;
         this.location = location;
         this.category = category;
+        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         // Upvoting system

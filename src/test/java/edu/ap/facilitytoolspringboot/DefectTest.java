@@ -3,6 +3,7 @@ package edu.ap.facilitytoolspringboot;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.repositories.ReportRepository;
 import edu.ap.facilitytoolspringboot.services.ReportService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,8 +41,26 @@ public class DefectTest {
         reportList.add(new Report("Ariana Grande", "P106809"));
     }
 
+
     @Test
-    public void countDefect(){
+    public void shouldReturnCorrectAmountOfReportitems(){
+        //arrange
+        List<Report> expectedReport = new ArrayList<Report>();
+        expectedReport.add(new Report("Selena Gomez", "P105106"));
+        expectedReport.add(new Report("Ariana Grande", "P106809"));
+
+        Mockito.doReturn(reportList).when(mockReportRepository).findAll();
+
+        //act
+        List<Report> result =  reportSystemUnderTest.getAllReports();
+
+        //assert
+        assertThat(result).containsExactlyInAnyOrderElementsOf(reportList);
+        Mockito.verify(mockReportRepository).saveAll(expectedReport);
+    }
+
+    @Test
+    public void InitializingCountMockDefectBecomesNull(){
         //arrange
         int count = (int) mockReportRepository.count();
 

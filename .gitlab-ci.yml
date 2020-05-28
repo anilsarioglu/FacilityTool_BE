@@ -1,3 +1,7 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_STRATEGY: clone
+
 stages:
   - build
   - deploy
@@ -6,6 +10,10 @@ build-container:
   stage: build
   script:
     ## Login to Gitlab Provided Container Registry for this project.
+    - cd frontend
+    - git checkout master
+    - git pull 
+    - cd .. 
     - docker info
     - docker-compose build --pull
   only:
