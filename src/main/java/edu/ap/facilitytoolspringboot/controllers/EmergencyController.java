@@ -15,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 //@Controller
 @RestController
 @CrossOrigin
@@ -29,6 +32,22 @@ public class EmergencyController {
         this.emergencyService = emergencyService;
     }
 
+    @GetMapping("/emergencies")
+    public ResponseEntity<List<Emergency>> getAll() {
+        try {
+            List<Emergency> emergencies = emergencyService.getAllEmergencies();
+            if (emergencies.isEmpty()) {
+                LOG.info("There are no emergencies to return");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned all reports");
+            return new ResponseEntity<>(emergencies, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the reports", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/emergencies")
     public ResponseEntity<Emergency> postEmergency(@RequestBody Emergency emergency) {
         try {
@@ -41,10 +60,21 @@ public class EmergencyController {
         }
     }
 
-    @PutMapping("/emergencies/id")
-    public ResponseEntity<Emergency> putEmergency(@RequestBody Emergency emergency) {
-        Emergency em = emergencyService.create(emergency);
-        return new ResponseEntity<>(em, HttpStatus.CREATED);
+
+    @PutMapping("/emergencies/{id}")
+    public ResponseEntity<Emergency> putEmergency(@PathVariable("id") String id, @RequestBody Emergency emergency) {
+        try {
+            Emergency em = emergencyService.changeEmergency(id,emergency);
+            LOG.info("changed an Emergency with the id: {}", em.getId());
+            return new ResponseEntity<>(em, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.error("Couldn't change an emergency", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
     }
+
+
+
+
 
 }

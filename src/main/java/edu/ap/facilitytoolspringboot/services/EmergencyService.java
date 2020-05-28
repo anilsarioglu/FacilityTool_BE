@@ -1,6 +1,8 @@
 package edu.ap.facilitytoolspringboot.services;
 
 import edu.ap.facilitytoolspringboot.models.Emergency;
+import edu.ap.facilitytoolspringboot.models.Reaction;
+import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.repositories.EmergencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,23 +24,27 @@ public class EmergencyService {
         return emergencyRepository.save(emergency);
     }
 
-    /*public Emergency changeEmergency(String id, Emergency em) {
-        Optional<Emergency> emergency = emergencyRepository.findById(id);
+    /*public Emergency changeEmergency(String id, Emergency emergency) {
+        Optional<Emergency> findEmergencyId = emergencyRepository.findById(id);
+        if (findEmergencyId.isPresent()){
+            Emergency emergency1 = findEmergencyId.get();
+            emergencyRepository.save(emergency1);
+        }
+        return emergency;
+    }*/
 
+
+    public Emergency changeEmergency(String id,Emergency emergency) {
+        Optional<Emergency> existingEmergency = emergencyRepository.findById(id);
+
+        if (existingEmergency.isPresent()) {
+            Emergency emergency1 = existingEmergency.get();
+            emergency1 = emergency;
+            emergencyRepository.save(emergency1);
+            return emergency1;
+        }
         return null;
-    }*/
-
-
-   /* public Emergency changeEmergency(String id) {
-        Optional<Emergency> existingEmergency = reportRepository.findById(id);
-
-        Emergency emergency = existingEmergency.get();
-        emergency.setEmergencyContactsType();
-
-        emergencyRepository.save(emergency);
-        return report;
-
-    }*/
+    }
 
     public List<Emergency> getAllEmergencies() {
         return emergencyRepository.findAll();

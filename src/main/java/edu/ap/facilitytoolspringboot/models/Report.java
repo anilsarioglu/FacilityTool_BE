@@ -39,6 +39,11 @@ public class Report {
     @Lob
     private Object photos;
 
+
+    public Report() {
+
+    }
+
     public Report(Object photos) {
         this.photos = photos;
     }
