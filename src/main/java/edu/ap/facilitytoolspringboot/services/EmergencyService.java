@@ -24,16 +24,6 @@ public class EmergencyService {
         return emergencyRepository.save(emergency);
     }
 
-    /*public Emergency changeEmergency(String id, Emergency emergency) {
-        Optional<Emergency> findEmergencyId = emergencyRepository.findById(id);
-        if (findEmergencyId.isPresent()){
-            Emergency emergency1 = findEmergencyId.get();
-            emergencyRepository.save(emergency1);
-        }
-        return emergency;
-    }*/
-
-
     public Emergency changeEmergency(String id,Emergency emergency) {
         Optional<Emergency> existingEmergency = emergencyRepository.findById(id);
 
