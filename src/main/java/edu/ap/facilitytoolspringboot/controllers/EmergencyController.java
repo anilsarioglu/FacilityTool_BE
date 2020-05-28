@@ -48,6 +48,8 @@ public class EmergencyController {
         }
     }
 
+
+
     @PostMapping("/emergencies")
     public ResponseEntity<Emergency> postEmergency(@RequestBody Emergency emergency) {
         try {
@@ -59,7 +61,6 @@ public class EmergencyController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-
 
     @PutMapping("/emergencies/{id}")
     public ResponseEntity<Emergency> putEmergency(@PathVariable("id") String id, @RequestBody Emergency emergency) {
@@ -84,9 +85,5 @@ public class EmergencyController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
-
-
-
-
 
 }
