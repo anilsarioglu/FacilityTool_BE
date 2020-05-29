@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -35,11 +36,32 @@ public class TaskTest {
 
     @Before
     public void setUp() {
-        report = new Report("Test Name", "P000001");
+        report = new Report("Younes", "P106204");
+        reportList = new ArrayList<>();
+        reportList.add(new Report("Amine", "P105106"));
+        reportList.add(new Report("Kjenti", "P106809"));
     }
 
     //Task created test
     @Test
+    public void checkTaskCreated(){
+        //arrange
+        List<Report> expectedReport = new ArrayList<Report>();
+        expectedReport.add(new Report("Jordan", "P105106"));
+        expectedReport.add(new Report("Anil", "P106809"));
+
+        Mockito.doReturn(reportList).when(mockReportRepository).findAll();
+
+        //act
+        List<Report> result =  reportSystemUnderTest.getAllReports();
+
+        //assert
+        assertThat(result).containsExactlyInAnyOrderElementsOf(reportList);
+        //Mockito.verify(mockReportRepository).saveAll(expectedReport);
+    }
+
+    //Task created test
+    /*@Test
     public void checkTaskCreated(){
         //arrange
         int count = (int) mockReportRepository.count();
@@ -51,7 +73,7 @@ public class TaskTest {
 
         //assert
         assertEquals(count, count2);
-    }
+    }*/
 
     @org.springframework.context.annotation.Configuration
     public static class ContextConfiguration {
