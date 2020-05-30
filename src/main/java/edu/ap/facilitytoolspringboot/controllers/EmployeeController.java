@@ -1,6 +1,7 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
 import edu.ap.facilitytoolspringboot.models.Employee;
+import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.services.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAll() {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         try {
             List<Employee> employees = employeeService.getAll();
             if (employees.isEmpty()) {
@@ -39,7 +40,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/by-id/{id}")
-    public ResponseEntity<Employee> getById(@PathVariable("id") String id) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
         try {
             Employee employee = employeeService.getById(id);
             if (employee == null) {
@@ -55,14 +56,29 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees")
-    public ResponseEntity<Employee> postCategory(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> postEmployee(@RequestBody Employee employee) {
         try {
             Employee emp = employeeService.create(employee);
             LOG.info("Created a new employee");
             return new ResponseEntity<>(emp, HttpStatus.CREATED);
         } catch (Exception e) {
             LOG.info("Couldn't create a new employee", e);
-            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/employees/{id}/reports")
+    public ResponseEntity<Report> postReportToEmployee(@PathVariable("id") String employeeId, @RequestBody Report report) {
+        try {
+            LOG.error(employeeId);
+            LOG.error(report.toString());
+            Report rep = employeeService.addAssignedReport(employeeId, report);
+            //Report rep = employeeService.addReport(employeeId, report);
+            LOG.info("Added a new report to the employee with id: {}", employeeId);
+            return new ResponseEntity<>(rep, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.info("Couldn't add a new report to the employee with id: {}", employeeId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

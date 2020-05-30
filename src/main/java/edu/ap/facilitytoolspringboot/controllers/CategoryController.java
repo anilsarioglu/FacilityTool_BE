@@ -46,7 +46,7 @@ public class CategoryController {
             LOG.info("Created a new category");
             return new ResponseEntity<>(cat, HttpStatus.CREATED);
         } catch (Exception e) {
-            LOG.info("Couldn't create a new category", e);
+            LOG.error("Couldn't create a new category", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }

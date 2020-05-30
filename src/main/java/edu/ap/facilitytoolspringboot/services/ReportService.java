@@ -26,9 +26,11 @@ public class ReportService {
     public Reaction saveReactions(String id, Reaction reaction) {
         Optional<Report> report = reportRepository.findById(id);
         if (report.isPresent()){
-            List<Reaction> reactions = report.get().getReactions();
-            reactions.add(reaction);
-            reportRepository.save(report.get());
+            Report rep = report.get();
+            List<Reaction> reactionList = rep.getReactions();
+            reactionList.add(reaction);
+            rep.setReactions(reactionList);
+            reportRepository.save(rep);
         }
         return reaction;
     }
