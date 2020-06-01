@@ -70,12 +70,14 @@ public class EmployeeController {
     @PostMapping("/employees/{id}/reports")
     public ResponseEntity<Report> postReportToEmployee(@PathVariable("id") String employeeId, @RequestBody Report report) {
         try {
-            LOG.error(employeeId);
-            LOG.error(report.toString());
             Report rep = employeeService.addAssignedReport(employeeId, report);
-            //Report rep = employeeService.addReport(employeeId, report);
-            LOG.info("Added a new report to the employee with id: {}", employeeId);
-            return new ResponseEntity<>(rep, HttpStatus.CREATED);
+            if (rep == null) {
+                LOG.info("Report with id: {} is already assigned to the employee with id: {}", report.getId(), employeeId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                LOG.info("Added a new report to the employee with id: {}", employeeId);
+                return new ResponseEntity<>(rep, HttpStatus.CREATED);
+            }
         } catch (Exception e) {
             LOG.info("Couldn't add a new report to the employee with id: {}", employeeId, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

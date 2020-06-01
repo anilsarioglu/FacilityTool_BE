@@ -58,8 +58,12 @@ public class Employee {
         this.assignedReports = assignedReports;
     }
 
-    public void addAssignedReport(Report assignedReport) {
-        this.assignedReports.add(assignedReport);
+    public boolean isReportAlreadyAssigned(Report report) {
+        List<String> allReportIds = new ArrayList<>();
+        for (Report rep : assignedReports ) {
+            allReportIds.add(rep.getId());
+        }
+        return allReportIds.contains(report.getId());
     }
 
     @Override

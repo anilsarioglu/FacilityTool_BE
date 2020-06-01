@@ -1,7 +1,6 @@
 package edu.ap.facilitytoolspringboot.services;
 
 import edu.ap.facilitytoolspringboot.models.Employee;
-import edu.ap.facilitytoolspringboot.models.Reaction;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,30 +27,22 @@ public class EmployeeService {
         return employee.orElse(null);
     }
 
+    public Employee create(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
     public Report addAssignedReport(String employeeId, Report report) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         if (employee.isPresent()) {
             Employee emp = employee.get();
-            List<Report> employeeList = emp.getAssignedReports();
-            employeeList.add(report);
-            emp.setAssignedReports(employeeList);
-            employeeRepository.save(emp);
-            return report;
+            if (!emp.isReportAlreadyAssigned(report)) {
+                List<Report> employeeList = emp.getAssignedReports();
+                employeeList.add(report);
+                emp.setAssignedReports(employeeList);
+                employeeRepository.save(emp);
+                return report;
+            }
         }
         return null;
-    }
-
-    public Report addReport(String employeeId, Report report) {
-        Optional<Employee> employee = employeeRepository.findById(employeeId);
-        if (employee.isPresent()){
-            List<Report> reports = employee.get().getAssignedReports();
-            reports.add(report);
-            employeeRepository.save(employee.get());
-        }
-        return report;
-    }
-
-    public Employee create(Employee employee) {
-        return employeeRepository.save(employee);
     }
 }
