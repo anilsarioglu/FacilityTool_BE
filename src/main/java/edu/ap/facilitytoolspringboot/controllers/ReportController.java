@@ -2,13 +2,17 @@ package edu.ap.facilitytoolspringboot.controllers;
 
 import edu.ap.facilitytoolspringboot.models.Reaction;
 import edu.ap.facilitytoolspringboot.models.Report;
+import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
+import edu.ap.facilitytoolspringboot.repositories.ReportRepository;
 import edu.ap.facilitytoolspringboot.services.ReportService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +24,8 @@ import java.util.List;
 public class ReportController {
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
     private ReportService reportService;
+
+    private ReportRepository reportRepository;
 
     @Autowired
     public ReportController(ReportService reportService) {
@@ -118,6 +124,26 @@ public class ReportController {
             }
         } catch (Exception e) {
             LOG.error("Couldn't upvote/downvote the report with id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    // statusChange System
+    @PutMapping("/reports/status/{id}")
+    public ResponseEntity<Report> updateStatus(@PathVariable("id") String id, @RequestBody String status) {
+        LOG.info(status);
+        EnumStatus st = EnumStatus.valueOf(status);
+        try {
+            Report report = reportService.changeStatus(id, st);
+            if (report != null) {
+                LOG.info("Report with id: {} statusupdate succesfully", id);
+                return new ResponseEntity<>(report, HttpStatus.OK);
+            } else {
+                LOG.info("There is no report with the id: {}", id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            LOG.error("Couldn't update the report with id: {}", id, e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }

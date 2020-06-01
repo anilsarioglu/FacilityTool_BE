@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
 
-import edu.ap.facilitytoolspringboot.models.enums.Status;
+import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,6 +21,7 @@ public class Report {
     private String pNumber;
     private Date date;
     private String type;
+    private Date requestDate;
     private String location;
     private String category;
     private String description;
@@ -31,7 +32,7 @@ public class Report {
     private boolean isUpvoted;
 
     // @Enumerated(EnumType.STRING)
-    private Status status;
+    private EnumStatus status;
 
     private List<Reaction> reactions;
 
@@ -39,7 +40,6 @@ public class Report {
     private Object photos;
 
     public Report() {
-        super();
     }
 
     public Report(Object photos) {
@@ -56,14 +56,16 @@ public class Report {
         this.pNumber = pNumber;
     }
 
-    public Report(String reporter, String pNumber, Date date, String type, String location, String category, String description,
-                  String locationDescription, Status status, Object photos) {
+    public Report(String reporter, String pNumber, Date date, String type, Date requestDate, String location, String category, String description,
+                  String locationDescription, EnumStatus status, Object photos) {
         this.reporter = reporter;
         this.pNumber = pNumber;
         this.date = date;
         this.type = type;
+        this.requestDate = requestDate;
         this.location = location;
         this.category = category;
+        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         this.status = status;
@@ -73,15 +75,17 @@ public class Report {
         this.isUpvoted = false;
     }
 
-    public Report(String id, String reporter, String pNumber, Date date, String type, String location, String category,
+    public Report(String id, String reporter, String pNumber, Date date, Date requestDate, String type, String location, String category,
                   String description, String locationDescription) {
         this.id = id;
         this.reporter = reporter;
         this.pNumber = pNumber;
         this.date = date;
         this.type = type;
+        this.requestDate = requestDate;
         this.location = location;
         this.category = category;
+        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         // Upvoting system
@@ -129,6 +133,14 @@ public class Report {
         this.type = type;
     }
 
+    public Date getRequestDate(){
+        return requestDate;
+    }
+
+    public void setRequestDate(Date requestDate){
+        this.requestDate = requestDate;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -161,11 +173,11 @@ public class Report {
         this.locationDescription = locationDescription;
     }
 
-    public Status getStatus() {
+    public EnumStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(EnumStatus status) {
         this.status = status;
     }
 
@@ -210,6 +222,7 @@ public class Report {
                 ", pNumber='" + pNumber + '\'' +
                 ", date=" + date +
                 ", type='" + type + '\'' +
+                ", requestDate='" + requestDate + '\'' +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +
