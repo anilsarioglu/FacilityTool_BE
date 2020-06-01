@@ -18,7 +18,7 @@ public class ToggleUpvoteTest {
         ReportRepository mockReportRepository = Mockito.mock(ReportRepository.class);
         ReportService sut = new ReportService(mockReportRepository);
 
-        Report report = new Report("5ebe886a802377185431452", "Anil Sarioglu", "P123456", new Date(), " Defect ", "00.09 PROJECTROOM",
+        Report report = new Report("5ebe886a802377185431452", "Anil Sarioglu", "P123456", new Date(), new Date(), " Opdracht ", "00.09 PROJECTROOM",
                 "Raam", "Barst in raam","Aan de linkerkant");
 
         String reportId = report.getId();
