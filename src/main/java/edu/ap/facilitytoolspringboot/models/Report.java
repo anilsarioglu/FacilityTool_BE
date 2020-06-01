@@ -1,5 +1,6 @@
 package edu.ap.facilitytoolspringboot.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
 
-import edu.ap.facilitytoolspringboot.models.enums.Status;
+import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -32,15 +33,15 @@ public class Report {
     private boolean isUpvoted;
 
     // @Enumerated(EnumType.STRING)
-    private Status status;
+    private EnumStatus status;
 
     private List<Reaction> reactions;
 
     @Lob
     private Object photos;
 
-
     public Report() {
+        reactions = new ArrayList<>();
     }
 
     public Report(Object photos) {
@@ -58,7 +59,7 @@ public class Report {
     }
 
     public Report(String reporter, String pNumber, Date date, String type, Date requestDate, String location, String category, String description,
-                  String locationDescription, Status status, Object photos) {
+                  String locationDescription, EnumStatus status, Object photos) {
         this.reporter = reporter;
         this.pNumber = pNumber;
         this.date = date;
@@ -66,7 +67,6 @@ public class Report {
         this.requestDate = requestDate;
         this.location = location;
         this.category = category;
-        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         this.status = status;
@@ -86,7 +86,6 @@ public class Report {
         this.requestDate = requestDate;
         this.location = location;
         this.category = category;
-        this.requestDate = requestDate;
         this.description = description;
         this.locationDescription = locationDescription;
         // Upvoting system
@@ -174,11 +173,11 @@ public class Report {
         this.locationDescription = locationDescription;
     }
 
-    public Status getStatus() {
+    public EnumStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(EnumStatus status) {
         this.status = status;
     }
 

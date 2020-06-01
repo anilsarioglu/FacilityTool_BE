@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import edu.ap.facilitytoolspringboot.models.Report;
+import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,11 @@ public class ReportService {
     public Reaction saveReactions(String id, Reaction reaction) {
         Optional<Report> report = reportRepository.findById(id);
         if (report.isPresent()){
-            List<Reaction> reactions = report.get().getReactions();
-            reactions.add(reaction);
-            reportRepository.save(report.get());
+            Report rep = report.get();
+            List<Reaction> reactionList = rep.getReactions();
+            reactionList.add(reaction);
+            rep.setReactions(reactionList);
+            reportRepository.save(rep);
         }
         return reaction;
     }
@@ -80,6 +83,20 @@ public class ReportService {
                 int decrementedUpvotes = report.getNumberUpvotes() - 1;
                 report.setNumberUpvotes(decrementedUpvotes);
             }
+            reportRepository.save(report);
+            return report;
+        }
+        return null;
+    }
+
+    // statusChange System
+    public Report changeStatus(String id, EnumStatus status) {
+        Optional<Report> existingDefect = reportRepository.findById(id);
+
+        if (existingDefect.isPresent()) {
+            Report report = existingDefect.get();
+            report.setStatus(status);
+            
             reportRepository.save(report);
             return report;
         }

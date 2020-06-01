@@ -46,7 +46,7 @@ public class CategoryController {
             LOG.info("Created a new category");
             return new ResponseEntity<>(cat, HttpStatus.CREATED);
         } catch (Exception e) {
-            LOG.info("Couldn't create a new category", e);
+            LOG.error("Couldn't create a new category", e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
@@ -58,7 +58,7 @@ public class CategoryController {
             LOG.info("Deleted the category with the name: {}", name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            LOG.error("Couldn't delete the category with the name; {}", name);
+            LOG.error("Couldn't delete the category with the name: {}", name);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }

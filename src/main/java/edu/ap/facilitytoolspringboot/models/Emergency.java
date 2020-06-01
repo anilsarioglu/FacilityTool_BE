@@ -29,6 +29,12 @@ public class Emergency {
         this.employeeName = employeeName;
     }
 
+    public Emergency(String employeeName, String mail) {
+        this.employeeName = employeeName;
+        this.mail = mail;
+    }
+
+
     public Emergency(String id, String emergencyContactsType, String employeeType, String employeeName, String phoneNumber, String mobileNumber, String mail, String mail2) {
         this.id = id;
         this.emergencyContactsType = emergencyContactsType;
