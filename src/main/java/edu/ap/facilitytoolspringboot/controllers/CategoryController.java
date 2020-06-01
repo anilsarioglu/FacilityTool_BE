@@ -58,7 +58,7 @@ public class CategoryController {
             LOG.info("Deleted the category with the name: {}", name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            LOG.error("Couldn't delete the category with the name; {}", name);
+            LOG.error("Couldn't delete the category with the name: {}", name);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
