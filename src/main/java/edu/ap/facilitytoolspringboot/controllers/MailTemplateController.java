@@ -51,7 +51,7 @@ public class MailTemplateController {
         }
     }
 
-    @DeleteMapping("/mail-template/by-name/{name}")
+    @DeleteMapping("/mail-templates/by-name/{name}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable("name") String name) {
         try {
             mailTemplateService.deleteByName(name);
