@@ -75,7 +75,7 @@ public class ExternalFirmController {
             LOG.info("ExternalFirm with id: {} removed successfully", id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            LOG.error("Couldn't remove the ExternalFirm with id: {}", id, e);
+            LOG.error("Could not remove the ExternalFirm with id: {}", id, e);
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
