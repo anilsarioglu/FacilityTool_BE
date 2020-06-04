@@ -55,6 +55,23 @@ public class EmployeeController {
         }
     }
 
+    @GetMapping("/employees/{id}/reports")
+    public ResponseEntity<List<Report>> getAssignedReports(@PathVariable("id") String employeeId){
+        try {
+            List<Report> employeeReports = employeeService.getAllReports(employeeId);
+            if (employeeReports.isEmpty()) {
+                LOG.info("Employee with id: {} has no assigned reports.", employeeId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned the reports from employee with id: {}", employeeId);
+            return new ResponseEntity<>(employeeReports, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the reports of employee with id: {}", employeeId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @PostMapping("/employees")
     public ResponseEntity<Employee> postEmployee(@RequestBody Employee employee) {
         try {
@@ -83,4 +100,6 @@ public class EmployeeController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    
 }

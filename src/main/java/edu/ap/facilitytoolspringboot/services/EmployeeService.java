@@ -45,4 +45,11 @@ public class EmployeeService {
         }
         return null;
     }
+
+    public List<Report> getAllReports(String employeeId){
+        Employee employee = getById(employeeId);
+        List<Report> reports = employee.getAssignedReports(); 
+        return reports; 
+    }
+
 }
