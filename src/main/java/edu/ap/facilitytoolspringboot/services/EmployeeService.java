@@ -6,16 +6,19 @@ import edu.ap.facilitytoolspringboot.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
+    private ReportService reportService; 
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, ReportService reportService) {
         this.employeeRepository = employeeRepository;
+        this.reportService = reportService; 
     }
 
     public List<Employee> getAll() {
@@ -31,16 +34,16 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Report addAssignedReport(String employeeId, Report report) {
+    public String addAssignedReportId(String employeeId, String reportId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         if (employee.isPresent()) {
             Employee emp = employee.get();
-            if (!emp.isReportAlreadyAssigned(report)) {
-                List<Report> employeeList = emp.getAssignedReports();
-                employeeList.add(report);
+            if (!emp.isReportAlreadyAssigned(reportId)) {
+                List<String> employeeList = emp.getAssignedReportsId();
+                employeeList.add(reportId);
                 emp.setAssignedReports(employeeList);
                 employeeRepository.save(emp);
-                return report;
+                return reportId;
             }
         }
         return null;
@@ -48,7 +51,11 @@ public class EmployeeService {
 
     public List<Report> getAllReports(String employeeId){
         Employee employee = getById(employeeId);
-        List<Report> reports = employee.getAssignedReports(); 
+        List<String> reportIds = employee.getAssignedReportsId(); 
+        List<Report> reports = new ArrayList<>();
+        for (String reportId : reportIds) {
+            reports.add(reportService.getById(reportId));
+        }
         return reports; 
     }
 

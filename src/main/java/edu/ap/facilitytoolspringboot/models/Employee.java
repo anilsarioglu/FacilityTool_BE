@@ -15,10 +15,10 @@ public class Employee {
     private String id;
     private String name;
     private String pNumber;
-    private List<Report> assignedReports;
+    private List<String> assignedReportsId;
 
     public Employee() {
-        assignedReports = new ArrayList<>();
+        assignedReportsId = new ArrayList<>();
     }
 
     public Employee(String name, String pNumber) {
@@ -50,20 +50,20 @@ public class Employee {
         this.pNumber = pNumber;
     }
 
-    public List<Report> getAssignedReports() {
-        return assignedReports;
+    public List<String> getAssignedReportsId() {
+        return assignedReportsId;
     }
 
-    public void setAssignedReports(List<Report> assignedReports) {
-        this.assignedReports = assignedReports;
+    public void setAssignedReports(List<String> assignedReportsId) {
+        this.assignedReportsId = assignedReportsId;
     }
 
-    public boolean isReportAlreadyAssigned(Report report) {
+    public boolean isReportAlreadyAssigned(String reportId) {
         List<String> allReportIds = new ArrayList<>();
-        for (Report rep : assignedReports ) {
-            allReportIds.add(rep.getId());
+        for (String repId : assignedReportsId ) {
+            allReportIds.add(repId);
         }
-        return allReportIds.contains(report.getId());
+        return allReportIds.contains(reportId);
     }
 
     @Override
@@ -72,7 +72,8 @@ public class Employee {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", pNumber='" + pNumber + '\'' +
-                ", assignedReports=" + assignedReports +
+                ", assignedReportsId=" + assignedReportsId +
                 '}';
     }
+    
 }
