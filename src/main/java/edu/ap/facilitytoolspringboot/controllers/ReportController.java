@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ReportController {
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
     private ReportService reportService;
