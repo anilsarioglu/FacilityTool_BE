@@ -16,4 +16,12 @@ services:
         container_name: java-app
         restart: always
         command: java -jar /target/facilitytoolspringboot-0.0.1-SNAPSHOT.jar
+        external_links:
+          - mongo
+    mongo:
+        image: mongo:3.6.17
+        container_name: database
+        restart: always
+        volumes:
+          - /data/database:/data/db
 
