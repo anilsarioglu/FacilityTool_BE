@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class ReportController {
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
     private ReportService reportService;
