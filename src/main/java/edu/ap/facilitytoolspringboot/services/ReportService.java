@@ -1,5 +1,6 @@
 package edu.ap.facilitytoolspringboot.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +52,30 @@ public class ReportService {
     public Report getById(String id) {
         Optional<Report> report = reportRepository.findById(id);
         return report.orElse(null);
+    }
+
+    // Archive
+    private List<Report> getReportsForArchive(){
+        List<Report> reportsWithStatusBeeindigd = reportRepository.findByStatus(EnumStatus.BEËINDIGD);
+        List<Report> reportsWithStatusGeannuleerd = reportRepository.findByStatus(EnumStatus.GEANNULEERD);
+        List<Report> reportsWithStatusWordtNietUitgevoerd = reportRepository.findByStatus(EnumStatus.WORDT_NIET_UITGEVOERD);
+
+        List<Report> reportsForArchive = new ArrayList<>(reportsWithStatusBeeindigd);
+        reportsForArchive.addAll(reportsWithStatusGeannuleerd);
+        reportsForArchive.addAll(reportsWithStatusWordtNietUitgevoerd);
+
+        return reportsForArchive;
+    }
+
+    public List<Report> getDefectsOrTasksForArchive(String type) {
+        List<Report> reports = getReportsForArchive();
+        List<Report> reportsForArchive = new ArrayList<>();
+        for (Report rep : reports) {
+            if (rep.getType().trim().equalsIgnoreCase(type)) {
+                reportsForArchive.add(rep);
+            }
+        }
+        return reportsForArchive;
     }
 
     public void deleteAll() {

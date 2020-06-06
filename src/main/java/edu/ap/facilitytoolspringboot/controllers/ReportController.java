@@ -85,6 +85,23 @@ public class ReportController {
         }
     }
 
+    //Archive
+    @GetMapping("/reports/archive/{type}")
+    public ResponseEntity<List<Report>> getArchive(@PathVariable("type") String type) {
+        try {
+            List<Report> reports = reportService.getDefectsOrTasksForArchive(type);
+            if (reports.isEmpty()) {
+                LOG.info("There are no reports with the type: {}", type);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned the reports with the type : {}", type);
+            return new ResponseEntity<>(reports, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the reports with the type: {}", type, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/reports")
     public ResponseEntity<Report> postReport(@RequestBody Report report) {
         try {
