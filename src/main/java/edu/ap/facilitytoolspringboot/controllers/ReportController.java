@@ -84,12 +84,12 @@ public class ReportController {
     @GetMapping("/reports/archive/{type}")
     public ResponseEntity<List<Report>> getArchive(@PathVariable("type") String type) {
         try {
-            List<Report> reports = reportService.getDefectsOrTasksForArchive(type);
+            List<Report> reports = reportService.getReportsForArchive(type);
             if (reports.isEmpty()) {
                 LOG.info("There are no reports with the type: {}", type);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            LOG.info("Returned the reports with the type : {}", type);
+            LOG.info("Returned the reports with the type: {}", type);
             return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {
             LOG.error("Couldn't return the reports with the type: {}", type, e);
@@ -143,7 +143,6 @@ public class ReportController {
     // statusChange System
     @PutMapping("/reports/status/{id}")
     public ResponseEntity<Report> updateStatus(@PathVariable("id") String id, @RequestBody String status) {
-        LOG.info(status);
         EnumStatus st = EnumStatus.valueOf(status);
         try {
             Report report = reportService.changeStatus(id, st);

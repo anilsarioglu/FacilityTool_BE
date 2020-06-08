@@ -63,24 +63,16 @@ public class ReportService {
     }
 
     // Archive
-    private List<Report> getReportsForArchive(){
-        List<Report> reportsWithStatusBeeindigd = reportRepository.findByStatus(EnumStatus.BEËINDIGD);
-        List<Report> reportsWithStatusGeannuleerd = reportRepository.findByStatus(EnumStatus.GEANNULEERD);
-        List<Report> reportsWithStatusWordtNietUitgevoerd = reportRepository.findByStatus(EnumStatus.WORDT_NIET_UITGEVOERD);
-
-        List<Report> reportsForArchive = new ArrayList<>(reportsWithStatusBeeindigd);
-        reportsForArchive.addAll(reportsWithStatusGeannuleerd);
-        reportsForArchive.addAll(reportsWithStatusWordtNietUitgevoerd);
-
-        return reportsForArchive;
-    }
-
-    public List<Report> getDefectsOrTasksForArchive(String type) {
-        List<Report> reports = getReportsForArchive();
+    public List<Report> getReportsForArchive(String type){
+        List<Report> allReports = reportRepository.findAll();
         List<Report> reportsForArchive = new ArrayList<>();
-        for (Report rep : reports) {
-            if (rep.getType().trim().equalsIgnoreCase(type)) {
-                reportsForArchive.add(rep);
+        for (Report report : allReports) {
+            if (report.getType().trim().equals(type) && (
+                    report.getStatus() == EnumStatus.BEËINDIGD  ||
+                    report.getStatus() == EnumStatus.GEANNULEERD ||
+                    report.getStatus() == EnumStatus.WORDT_NIET_UITGEVOERD)
+            ) {
+                reportsForArchive.add(report);
             }
         }
         return reportsForArchive;
