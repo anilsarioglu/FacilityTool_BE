@@ -38,7 +38,15 @@ public class ReportService {
     }
 
     public List<Report> getAllReports() {
-        return reportRepository.findAll();
+        List<Report> allReports = reportRepository.findAll();
+        List<Report> reportsNotInArchive = new ArrayList<>();
+        for (Report report : allReports) {
+            if (report.getStatus() != EnumStatus.BEËINDIGD && report.getStatus() != EnumStatus.GEANNULEERD
+            && report.getStatus() != EnumStatus.WORDT_NIET_UITGEVOERD) {
+                reportsNotInArchive.add(report);
+            }
+        }
+        return reportsNotInArchive;
     }
 
     public Report getByReporter(String reporter) {
