@@ -26,6 +26,14 @@ public class Employee {
         this.pNumber = pNumber;
     }
 
+    // For testing only
+    public Employee(String id, String name, String pNumber) {
+        this.id = id;
+        this.name = name;
+        this.pNumber = pNumber;
+        assignedReportsId = new ArrayList<>();
+    }
+
     public String getId() {
         return id;
     }
