@@ -67,10 +67,11 @@ public class ReportService {
         List<Report> allReports = reportRepository.findAll();
         List<Report> reportsForArchive = new ArrayList<>();
         for (Report report : allReports) {
-            if (report.getType().trim().equals(type) && (
-                    report.getStatus() == EnumStatus.BEËINDIGD  ||
+            if ( report.getType().trim().equalsIgnoreCase(type) && (
+                    report.getStatus() == EnumStatus.BEËINDIGD ||
                     report.getStatus() == EnumStatus.GEANNULEERD ||
-                    report.getStatus() == EnumStatus.WORDT_NIET_UITGEVOERD)
+                    report.getStatus() == EnumStatus.WORDT_NIET_UITGEVOERD
+                    )
             ) {
                 reportsForArchive.add(report);
             }
