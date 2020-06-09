@@ -13,7 +13,8 @@ import edu.ap.facilitytoolspringboot.models.Location;
 import edu.ap.facilitytoolspringboot.services.LocationService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class LocationController {
     private static final Logger LOG = LoggerFactory.getLogger(LocationController.class);
     private LocationService locationService;
