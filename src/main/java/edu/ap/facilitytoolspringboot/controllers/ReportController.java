@@ -17,7 +17,8 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class ReportController {
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
     private ReportService reportService;
@@ -97,6 +98,7 @@ public class ReportController {
         }
     }
 
+    //reports post
     @PostMapping("/reports")
     public ResponseEntity<Report> postReport(@RequestBody Report report) {
         try {
