@@ -1,5 +1,6 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
+import edu.ap.facilitytoolspringboot.models.ExternalFirm;
 import edu.ap.facilitytoolspringboot.models.Reaction;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
@@ -122,6 +123,18 @@ public class ReportController {
         }
     }
 
+    @PutMapping("/reports/{id}")
+    public ResponseEntity<Report> putReport(@PathVariable("id") String id, @RequestBody Report report) {
+        try {
+            Report r = reportService.changeReport(id,report);
+            LOG.info("changed an report with the id: {}", r.getId());
+            return new ResponseEntity<>(r, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.error("Couldn't change an report", e);
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
     // Upvoting System
     @PutMapping("/reports/upvote/{id}")
     public ResponseEntity<Report> toggleUpvote(@PathVariable("id") String id) {
@@ -170,4 +183,6 @@ public class ReportController {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
         }
     }
+
+
 }

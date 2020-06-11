@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import edu.ap.facilitytoolspringboot.models.ExternalFirm;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,6 +126,18 @@ public class ReportService {
             
             reportRepository.save(report);
             return report;
+        }
+        return null;
+    }
+
+    public Report changeReport(String id, Report report) {
+        Optional<Report> existingReport = reportRepository.findById(id);
+
+        if (existingReport.isPresent()) {
+            Report r1 = existingReport.get();
+            r1 = report;
+            reportRepository.save(r1);
+            return r1;
         }
         return null;
     }
