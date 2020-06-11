@@ -5,11 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class WebSocketController {
     private static final Logger LOG = LoggerFactory.getLogger(WebSocketController.class);
 

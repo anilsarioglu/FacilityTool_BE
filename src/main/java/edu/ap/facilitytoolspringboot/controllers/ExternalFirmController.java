@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class ExternalFirmController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);

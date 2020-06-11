@@ -13,7 +13,8 @@ import edu.ap.facilitytoolspringboot.models.MailTemplate;
 import edu.ap.facilitytoolspringboot.services.MailTemplateService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class MailTemplateController {
     private static final Logger LOG = LoggerFactory.getLogger(MailTemplateController.class);
     private MailTemplateService mailTemplateService;

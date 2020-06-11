@@ -13,7 +13,8 @@ import edu.ap.facilitytoolspringboot.models.Category;
 import edu.ap.facilitytoolspringboot.services.CategoryService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class CategoryController {
     private static final Logger LOG = LoggerFactory.getLogger(CategoryController.class);
     private CategoryService categoryService;

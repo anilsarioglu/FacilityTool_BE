@@ -20,7 +20,8 @@ import java.util.Optional;
 
 //@Controller
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping(path="api")
 public class EmergencyController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
