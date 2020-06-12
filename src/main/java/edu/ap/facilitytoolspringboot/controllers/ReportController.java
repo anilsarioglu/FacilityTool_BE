@@ -137,11 +137,11 @@ public class ReportController {
         }
     }
 
-    // Upvoting System
+    // UpVoting
     @PutMapping("/reports/upvote/{id}")
-    public ResponseEntity<Report> toggleUpvote(@PathVariable("id") String id) {
+    public ResponseEntity<Report> toggleUpVote(@PathVariable("id") String id, @RequestBody String userId) {
         try {
-            Report report = reportService.toggleUpvote(id);
+            Report report = reportService.toggleUpVote(id, userId);
             if (report != null) {
                 LOG.info("Report with id: {} upvoted/downvoted succesfully", id);
                 return new ResponseEntity<>(report, HttpStatus.OK);

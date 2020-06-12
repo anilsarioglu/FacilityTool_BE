@@ -28,9 +28,9 @@ public class Report {
     private String description;
     private String locationDescription;
 
-    // Upvoting system
-    private int numberUpvotes;
-    private boolean isUpvoted;
+    // UpVote
+    private int numberUpVotes;
+    private List<String> upVotedByIds;
 
     // @Enumerated(EnumType.STRING)
     private EnumStatus status;
@@ -42,6 +42,7 @@ public class Report {
 
     public Report() {
         reactions = new ArrayList<>();
+        upVotedByIds = new ArrayList<>();
     }
 
     public Report(Object photos) {
@@ -72,8 +73,7 @@ public class Report {
         this.status = status;
         this.photos = photos;
         // Upvoting system
-        this.numberUpvotes = 0;
-        this.isUpvoted = false;
+        this.numberUpVotes = 0;
     }
 
     public Report(String id, String reporter, String pNumber, Date date, Date requestDate, String type, String location, String category,
@@ -89,8 +89,7 @@ public class Report {
         this.description = description;
         this.locationDescription = locationDescription;
         // Upvoting system
-        this.numberUpvotes = 0;
-        this.isUpvoted = false;
+        this.numberUpVotes = 0;
     }
 
     public String getId() {
@@ -197,21 +196,29 @@ public class Report {
         this.photos = photos;
     }
 
-    // Upvoting system
-    public int getNumberUpvotes() {
-        return numberUpvotes;
+    // UpVote
+    public int getNumberUpVotes() {
+        return numberUpVotes;
     }
 
-    public void setNumberUpvotes(int numberUpvotes) {
-        this.numberUpvotes = numberUpvotes;
+    public void setNumberUpVotes(int numberUpVotes) {
+        this.numberUpVotes = numberUpVotes;
     }
 
-    public boolean isUpvoted() {
-        return isUpvoted;
+    public List<String> getUpVotedByIds() {
+        return upVotedByIds;
     }
 
-    public void setUpvoted(boolean isUpvoted) {
-        this.isUpvoted = isUpvoted;
+    public void setUpVotedByIds(List<String> upVotedByIds) {
+        this.upVotedByIds = upVotedByIds;
+    }
+
+    public void incrementNumberUpVotes() {
+        this.numberUpVotes++;
+    }
+
+    public void decrementNumberUpVotes() {
+        this.numberUpVotes--;
     }
 
     @Override
@@ -222,15 +229,15 @@ public class Report {
                 ", pNumber='" + pNumber + '\'' +
                 ", date=" + date +
                 ", type='" + type + '\'' +
-                ", requestDate='" + requestDate + '\'' +
+                ", requestDate=" + requestDate +
                 ", location='" + location + '\'' +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +
                 ", locationDescription='" + locationDescription + '\'' +
-                ", numberUpvotes=" + numberUpvotes +
-                ", isUpvoted=" + isUpvoted +
+                ", numberUpVotes=" + numberUpVotes +
+                ", upVotedByIds=" + upVotedByIds +
                 ", status=" + status +
-                ", reaction=" + reactions +
+                ", reactions=" + reactions +
                 ", photos=" + photos +
                 '}';
     }
