@@ -26,24 +26,23 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    private User getById(String id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.orElse(null);
-    }
-
     public User getCurrentUser(UserPrincipal userPrincipal) {
         Optional<User> user =  userRepository.findById(userPrincipal.getId());
         return user.orElse(null);
     }
 
     public List<Report> getAllReports(String userId){
-        User user = getById(userId);
-        List<String> reportIds = user.getAssignedReportsId();
-        List<Report> reports = new ArrayList<>();
-        for (String reportId : reportIds) {
-            reports.add(reportService.getById(reportId));
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            User user1 = user.get();
+            List<String> reportIds = user1.getAssignedReportsId();
+            List<Report> reports = new ArrayList<>();
+            for (String reportId : reportIds) {
+                reports.add(reportService.getById(reportId));
+            }
+            return reports;
         }
-        return reports;
+        return new ArrayList<>();
     }
 
     public String addAssignedReportId(String userId, String reportId) {

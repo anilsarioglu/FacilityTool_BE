@@ -64,8 +64,8 @@ public class AuthController {
         try {
             List<Report> userReports = userService.getAllReports(userId);
             if (userReports.isEmpty()) {
-                LOG.info("User with id: {} has no assigned reports.", userId);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                LOG.info("User with id: {} was not found", userId);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             LOG.info("Returned the reports from user with id: {}", userId);
             return new ResponseEntity<>(userReports, HttpStatus.OK);
