@@ -1,6 +1,7 @@
 package edu.ap.facilitytoolspringboot;
 
 import edu.ap.facilitytoolspringboot.models.Report;
+import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import edu.ap.facilitytoolspringboot.repositories.ReportRepository;
 import edu.ap.facilitytoolspringboot.services.ReportService;
 import org.junit.Test;
