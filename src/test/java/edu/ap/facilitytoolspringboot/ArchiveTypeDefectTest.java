@@ -26,7 +26,7 @@ public class ArchiveTypeDefectTest {
         ReportService sut = new ReportService(mockReportRepository);
 
         Report report1 = new Report("Anil Sarioglu", "P123456", new Date(), " Opdracht ", new Date(), "00.09 PROJECTROOM",
-                "Raam", "Sluit raam","Aan de linkerkant", EnumStatus.BEËINDIGD, new Object());
+                "Raam", "Sluit raam","Aan de linkerkant", EnumStatus.VOLTOOID, new Object());
         Report report2 = new Report("Jos Bedot", "P129656", new Date(), " Opdracht ", new Date(), "00.10 PROJECTROOM",
                 "Muur", "Schilder muur","Aan de rechterkant", EnumStatus.WORDT_NIET_UITGEVOERD, new Object());
         Report report3 = new Report("Mamm Samm", "P124266", new Date(), " Defect ", new Date(), "00.08 ONTSPANNINGSRUIMTE",
@@ -34,7 +34,7 @@ public class ArchiveTypeDefectTest {
         Report report4 = new Report("Hadi Lan", "P847373", new Date(), " Defect ", new Date(), "00.17 SPREEKCEL",
                 "Tuin", "Tak afgebroken","Eerste boom links", EnumStatus.GEANNULEERD, new Object());
         Report report5 = new Report("Como Lokko", "P365647", new Date(), " Defect ", new Date(), "00.11 PROJECTROOM",
-                "Elektriciteit", "Vloerdoos is stuk","", EnumStatus.GOED_GEKEURD, new Object());
+                "Elektriciteit", "Vloerdoos is stuk","", EnumStatus.IN_WACHT, new Object());
 
 
         reports.add(report1);
