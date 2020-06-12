@@ -1,6 +1,5 @@
-package edu.ap.facilitytoolspringboot.security;
+package edu.ap.facilitytoolspringboot.models;
 
-import edu.ap.facilitytoolspringboot.models.ExternalFirm;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

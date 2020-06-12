@@ -40,6 +40,12 @@ public class ExternalFirmService {
     }
 
 
+    /***
+     * Bij andere services hebben we eerst gekeken of een id present is,
+     * maar hier returnen we de id en kijken we of dat het bestaat of niet.
+     * @param id
+     * @return
+     */
     public ExternalFirm getById(String id) {
         Optional<ExternalFirm> externalFirm = externalFirmRepository.findById(id);
         return externalFirm.orElse(null);

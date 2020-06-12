@@ -3,7 +3,7 @@ package edu.ap.facilitytoolspringboot.services;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.User;
 import edu.ap.facilitytoolspringboot.repositories.UserRepository;
-import edu.ap.facilitytoolspringboot.security.UserPrincipal;
+import edu.ap.facilitytoolspringboot.models.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +26,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    /***
+     * We kunnen een specifeke gebruiker ophalen met de id en het model van UserPrincipal
+     * @param userPrincipal
+     * @return
+     */
     public User getCurrentUser(UserPrincipal userPrincipal) {
         Optional<User> user =  userRepository.findById(userPrincipal.getId());
         return user.orElse(null);
@@ -60,6 +65,13 @@ public class UserService {
         return null;
     }
 
+    /***
+     * We kijken via id en de body van een user of dat de id eigenlijk bestaat.
+     * Als een specifieke rol niet gelijk is aan een rol die werd opgehaald dan wordt er een rol opgeslaan.
+     * @param id
+     * @param updatedUser
+     * @return
+     */
     public User updateRole(String id, User updatedUser) {
         Optional<User> existingUser = userRepository.findById(id);
 

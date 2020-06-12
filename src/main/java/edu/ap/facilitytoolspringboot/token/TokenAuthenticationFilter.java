@@ -1,7 +1,8 @@
-package edu.ap.facilitytoolspringboot.security;
+package edu.ap.facilitytoolspringboot.token;
 
 import edu.ap.facilitytoolspringboot.models.ExternalFirm;
 import edu.ap.facilitytoolspringboot.repositories.ExternalFirmRepository;
+import edu.ap.facilitytoolspringboot.security.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /***
+     * In de Frontend steken we elke keer als we data willen posten een Bearer en
+     * hier halen we dat op.
+     * @param request
+     * @return
+     */
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

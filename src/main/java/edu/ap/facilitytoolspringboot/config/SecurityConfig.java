@@ -4,11 +4,11 @@ package edu.ap.facilitytoolspringboot.config;
 
 import edu.ap.facilitytoolspringboot.security.CustomUserDetailsService;
 import edu.ap.facilitytoolspringboot.security.RestAuthenticationEntryPoint;
-import edu.ap.facilitytoolspringboot.security.TokenAuthenticationFilter;
-import edu.ap.facilitytoolspringboot.security.oauth2.CustomOAuth2UserService;
-import edu.ap.facilitytoolspringboot.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import edu.ap.facilitytoolspringboot.security.oauth2.OAuth2AuthenticationFailureHandler;
-import edu.ap.facilitytoolspringboot.security.oauth2.OAuth2AuthenticationSuccessHandler;
+import edu.ap.facilitytoolspringboot.token.TokenAuthenticationFilter;
+import edu.ap.facilitytoolspringboot.security.CustomOAuth2UserService;
+import edu.ap.facilitytoolspringboot.security.HttpCookieOAuth2AuthorizationRequestRepository;
+import edu.ap.facilitytoolspringboot.security.OAuth2AuthenticationFailureHandler;
+import edu.ap.facilitytoolspringboot.security.OAuth2AuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

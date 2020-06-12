@@ -3,7 +3,7 @@ package edu.ap.facilitytoolspringboot.controllers;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.User;
 import edu.ap.facilitytoolspringboot.security.CurrentUser;
-import edu.ap.facilitytoolspringboot.security.UserPrincipal;
+import edu.ap.facilitytoolspringboot.models.UserPrincipal;
 import edu.ap.facilitytoolspringboot.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package edu.ap.facilitytoolspringboot.security.oauth2.user;
+package edu.ap.facilitytoolspringboot.security;
 
 
 

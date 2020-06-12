@@ -15,6 +15,7 @@ public class EmergencyService {
 
     private EmergencyRepository emergencyRepository;
 
+
     @Autowired
     public EmergencyService(EmergencyRepository emergencyRepository) {
         this.emergencyRepository = emergencyRepository;
@@ -24,6 +25,15 @@ public class EmergencyService {
         return emergencyRepository.save(emergency);
     }
 
+
+    /***
+     * Als we een noodgegevens willen wijzigen halen we in de Frontend de id en de body van emergency op.
+     * We gebruiken optional om geen 'Null Pointer Exceptions' te krijgen.
+     * We zoeken in deze methode de id en als het bestaat,gaan we die vervangen met de nieuwe id
+     * @param id
+     * @param emergency
+     * @return
+     */
     public Emergency changeEmergency(String id,Emergency emergency) {
         Optional<Emergency> existingEmergency = emergencyRepository.findById(id);
 

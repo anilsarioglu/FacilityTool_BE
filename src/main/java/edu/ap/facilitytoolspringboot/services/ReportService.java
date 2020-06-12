@@ -26,6 +26,13 @@ public class ReportService {
         return reportRepository.save(report);
     }
 
+    /***
+     * we zoeken eerst of dat de id van een melding bestaat,
+     * daarna halen we specifieke reacties op en voegen we dat achter de lijst op.
+     * @param id
+     * @param reaction
+     * @return
+     */
     public Reaction saveReactions(String id, Reaction reaction) {
         Optional<Report> report = reportRepository.findById(id);
         if (report.isPresent()){
@@ -64,6 +71,12 @@ public class ReportService {
     }
 
     // Archive
+    /***
+     * Een melding gaat naar het archief als het Voltooid, Geannuleerd of Niet uitgevoerd wordt.
+     * Dit hebben we gedaan via een enum.
+     * @param type
+     * @return
+     */
     public List<Report> getReportsForArchive(String type){
         List<Report> allReports = reportRepository.findAll();
         List<Report> reportsForArchive = new ArrayList<>();
@@ -94,6 +107,11 @@ public class ReportService {
     }
 
     // Upvoting system
+    /***
+     * deze toggle is bedoeld om upvote true of false te zetten.
+     * @param id
+     * @return
+     */
     public Report toggleUpvote(String id) {
         Optional<Report> existingDefect = reportRepository.findById(id);
 

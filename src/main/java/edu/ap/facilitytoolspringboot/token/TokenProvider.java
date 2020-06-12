@@ -1,7 +1,8 @@
-package edu.ap.facilitytoolspringboot.security;
+package edu.ap.facilitytoolspringboot.token;
 
 
 import edu.ap.facilitytoolspringboot.config.AppProperties;
+import edu.ap.facilitytoolspringboot.models.UserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +23,20 @@ public class TokenProvider {
         this.appProperties = appProperties;
     }
 
+    /***
+     * Hier wordt er een token gecreërd.
+     * Algemeen wordt er een HS256 gebruikt, maar omdat we meer beveiliging willen voor de idtoken meer veiligheid.
+     * Dus hebben we HS512 (ondertekend met  HMAC-SHA512(HASH BASED ALGORITME)) gebruikt.
+     * @param authentication
+     * @return
+     */
     public String createToken(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
+        //JSON web token
         return Jwts.builder()
                 .setSubject(userPrincipal.getId().toString())
                 .setIssuedAt(new Date())

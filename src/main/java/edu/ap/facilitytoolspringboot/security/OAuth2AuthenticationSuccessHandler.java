@@ -1,10 +1,9 @@
-package edu.ap.facilitytoolspringboot.security.oauth2;
+package edu.ap.facilitytoolspringboot.security;
 
 
 import edu.ap.facilitytoolspringboot.config.AppProperties;
 import edu.ap.facilitytoolspringboot.exception.BadRequestException;
-import edu.ap.facilitytoolspringboot.security.TokenProvider;
-import edu.ap.facilitytoolspringboot.util.CookieUtils;
+import edu.ap.facilitytoolspringboot.token.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
-import static edu.ap.facilitytoolspringboot.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static edu.ap.facilitytoolspringboot.security.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 
 @Component
@@ -53,7 +52,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
 
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
+        Optional<String> redirectUri = CookieAuth.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
         if(redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {

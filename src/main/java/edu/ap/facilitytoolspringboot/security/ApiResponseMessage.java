@@ -1,10 +1,10 @@
-package edu.ap.facilitytoolspringboot.payload;
+package edu.ap.facilitytoolspringboot.security;
 
-public class ApiResponse {
+public class ApiResponseMessage {
     private boolean success;
     private String message;
 
-    public ApiResponse(boolean success, String message) {
+    public ApiResponseMessage(boolean success, String message) {
         this.success = success;
         this.message = message;
     }
@@ -12,15 +12,12 @@ public class ApiResponse {
     public boolean isSuccess() {
         return success;
     }
-
     public void setSuccess(boolean success) {
         this.success = success;
     }
-
     public String getMessage() {
         return message;
     }
-
     public void setMessage(String message) {
         this.message = message;
     }

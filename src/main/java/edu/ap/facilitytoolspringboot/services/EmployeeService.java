@@ -34,6 +34,12 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    /***
+     * Als we een melding willen toewijzen zoeken we de id, maar ook de id van een werknemer
+     * @param employeeId
+     * @param reportId
+     * @return
+     */
     public String addAssignedReportId(String employeeId, String reportId) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         if (employee.isPresent()) {

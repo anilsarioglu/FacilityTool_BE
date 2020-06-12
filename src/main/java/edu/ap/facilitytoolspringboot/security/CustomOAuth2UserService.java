@@ -1,12 +1,10 @@
-package edu.ap.facilitytoolspringboot.security.oauth2;
+package edu.ap.facilitytoolspringboot.security;
 
 
 import edu.ap.facilitytoolspringboot.exception.OAuth2AuthenticationProcessingException;
 import edu.ap.facilitytoolspringboot.models.User;
 import edu.ap.facilitytoolspringboot.repositories.UserRepository;
-import edu.ap.facilitytoolspringboot.security.UserPrincipal;
-import edu.ap.facilitytoolspringboot.security.oauth2.user.OAuth2UserInfo;
-import edu.ap.facilitytoolspringboot.security.oauth2.user.OAuth2UserInfoFactory;
+import edu.ap.facilitytoolspringboot.models.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;

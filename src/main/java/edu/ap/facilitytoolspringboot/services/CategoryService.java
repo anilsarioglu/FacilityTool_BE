@@ -17,10 +17,19 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    /***
+     * Categorie creëren.
+     * @param category
+     * @return
+     */
     public Category create(Category category) {
         return categoryRepository.save(category);
     }
 
+    /***
+     * categorieën ophalen vanuit MongoDB via mongoDb repository
+     * @return
+     */
     public List<Category> getAll() {
         return categoryRepository.findAll();
     }

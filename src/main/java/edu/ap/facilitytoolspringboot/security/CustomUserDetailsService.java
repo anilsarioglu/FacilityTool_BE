@@ -3,7 +3,9 @@ package edu.ap.facilitytoolspringboot.security;
 
 import edu.ap.facilitytoolspringboot.exception.ResourceNotFoundException;
 import edu.ap.facilitytoolspringboot.models.ExternalFirm;
+import edu.ap.facilitytoolspringboot.models.ExternalFirmPrincipal;
 import edu.ap.facilitytoolspringboot.models.User;
+import edu.ap.facilitytoolspringboot.models.UserPrincipal;
 import edu.ap.facilitytoolspringboot.repositories.ExternalFirmRepository;
 import edu.ap.facilitytoolspringboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
