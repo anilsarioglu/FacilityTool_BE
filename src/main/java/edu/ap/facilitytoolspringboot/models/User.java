@@ -108,10 +108,11 @@ public class User {
     }
 
     public boolean isReportAlreadyAssigned(String reportId) {
-        List<String> allReportIds = new ArrayList<>();
-        for (String repId : assignedReportsId ) {
-            allReportIds.add(repId);
-        }
-        return allReportIds.contains(reportId);
+        //List<String> allReportIds = new ArrayList<>();
+        //for (String repId : assignedReportsId ) {
+        //    allReportIds.add(repId);
+        //}
+        //return allReportIds.contains(reportId);
+        return assignedReportsId.contains(reportId);
     }
 }

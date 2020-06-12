@@ -1,6 +1,6 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
-
+import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.User;
 import edu.ap.facilitytoolspringboot.security.CurrentUser;
 import edu.ap.facilitytoolspringboot.security.UserPrincipal;
@@ -59,6 +59,22 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/users/{id}/reports")
+    public ResponseEntity<List<Report>> getAssignedReports(@PathVariable("id") String userId){
+        try {
+            List<Report> userReports = userService.getAllReports(userId);
+            if (userReports.isEmpty()) {
+                LOG.info("User with id: {} has no assigned reports.", userId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned the reports from user with id: {}", userId);
+            return new ResponseEntity<>(userReports, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the reports of user with id: {}", userId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/role/{id}")
     public ResponseEntity<User> updateRole(@PathVariable String id, @RequestBody User updatedUser) {
         try {
@@ -88,4 +104,20 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/users/{id}/reports")
+    public ResponseEntity<String> postReportToUser(@PathVariable("id") String userId, @RequestBody String reportId) {
+        try {
+            String repId = userService.addAssignedReportId(userId, reportId);
+            if (repId == null) {
+                LOG.info("User with id: {} is not found", userId);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                LOG.info("Added a new report to the user with id: {}", userId);
+                return new ResponseEntity<>(repId, HttpStatus.CREATED);
+            }
+        } catch (Exception e) {
+            LOG.info("Couldn't add a new report to the user with id: {}", userId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
