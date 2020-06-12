@@ -43,7 +43,7 @@ public class AuthController {
         }
     }
 
-    @GetMapping("/user/me")
+    @GetMapping("/users/me")
     public ResponseEntity<User> getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
         try {
             User currentUser = userService.getCurrentUser(userPrincipal);
@@ -75,35 +75,6 @@ public class AuthController {
         }
     }
 
-    @PutMapping("/role/{id}")
-    public ResponseEntity<User> updateRole(@PathVariable String id, @RequestBody User updatedUser) {
-        try {
-            User user = userService.updateRole(id, updatedUser);
-            LOG.info("User with id: {} updated/created successfully", id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (Exception e) {
-            LOG.error("Couldn't update/create the user with id: {}", id, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping("/role-delete/{id}")
-    public ResponseEntity<User> removeRole(@PathVariable String id ) {
-        try {
-            User user = userService.removeRole(id);
-            if (user != null) {
-                LOG.info("User with id: {} updated/created successfully", id);
-                return new ResponseEntity<>(user, HttpStatus.OK);
-            } else {
-                LOG.info("There is no user with the id: {}", id);
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            LOG.error("Couldn't remove the role of the user with id: {}", id, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @PostMapping("/users/{id}/reports")
     public ResponseEntity<String> postReportToUser(@PathVariable("id") String userId, @RequestBody String reportId) {
         try {
@@ -117,6 +88,35 @@ public class AuthController {
             }
         } catch (Exception e) {
             LOG.info("Couldn't add a new report to the user with id: {}", userId, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/users/{id}/role")
+    public ResponseEntity<User> updateRole(@PathVariable String id, @RequestBody User updatedUser) {
+        try {
+            User user = userService.updateRole(id, updatedUser);
+            LOG.info("User with id: {} updated/created successfully", id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't update/create the user with id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("users/{id}/delete-role")
+    public ResponseEntity<User> removeRole(@PathVariable String id ) {
+        try {
+            User user = userService.removeRole(id);
+            if (user != null) {
+                LOG.info("Role of User with id: {} removed successfully", id);
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                LOG.info("There is no user with the id: {}", id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            LOG.error("Couldn't remove the role of the user with id: {}", id, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
