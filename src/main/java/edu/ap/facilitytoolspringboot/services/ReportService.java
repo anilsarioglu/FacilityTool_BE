@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import edu.ap.facilitytoolspringboot.models.ExternalFirm;
 import edu.ap.facilitytoolspringboot.models.Report;
 import edu.ap.facilitytoolspringboot.models.enums.EnumStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,30 +92,31 @@ public class ReportService {
         reportRepository.deleteById(id);
     }
 
-    // Upvoting system
-    public Report toggleUpvote(String id) {
-        Optional<Report> existingDefect = reportRepository.findById(id);
+    // Upvote
+    public Report toggleUpVote(String reportId, String userId){
+        Optional<Report> existingDefect = reportRepository.findById(reportId);
 
         if (existingDefect.isPresent()) {
+            List<String> idsOfUpVoters;
             Report report = existingDefect.get();
-            boolean isUpvoted = report.isUpvoted();
+            idsOfUpVoters = report.getUpVotedByIds();
 
-            if (!isUpvoted) {
-                report.setUpvoted(true);
-                int incrementedUpvotes = report.getNumberUpvotes() + 1;
-                report.setNumberUpvotes(incrementedUpvotes);
+            if (report.getUpVotedByIds().contains(userId)) {
+                report.decrementNumberUpVotes();
+                idsOfUpVoters.remove(userId);
             } else {
-                report.setUpvoted(false);
-                int decrementedUpvotes = report.getNumberUpvotes() - 1;
-                report.setNumberUpvotes(decrementedUpvotes);
+                report.incrementNumberUpVotes();
+                idsOfUpVoters.add(userId);
             }
+
+            report.setUpVotedByIds(idsOfUpVoters);
             reportRepository.save(report);
             return report;
         }
         return null;
     }
 
-    // statusChange System
+    // statusChange
     public Report changeStatus(String id, EnumStatus status) {
         Optional<Report> existingDefect = reportRepository.findById(id);
 
