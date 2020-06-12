@@ -42,7 +42,7 @@ public class ReportService {
         List<Report> allReports = reportRepository.findAll();
         List<Report> reportsNotInArchive = new ArrayList<>();
         for (Report report : allReports) {
-            if (report.getStatus() != EnumStatus.BEËINDIGD && report.getStatus() != EnumStatus.GEANNULEERD
+            if (report.getStatus() != EnumStatus.VOLTOOID && report.getStatus() != EnumStatus.GEANNULEERD
             && report.getStatus() != EnumStatus.WORDT_NIET_UITGEVOERD) {
                 reportsNotInArchive.add(report);
             }
@@ -69,7 +69,7 @@ public class ReportService {
         List<Report> reportsForArchive = new ArrayList<>();
         for (Report report : allReports) {
             if ( report.getType().trim().equalsIgnoreCase(type) && (
-                    report.getStatus() == EnumStatus.BEËINDIGD ||
+                    report.getStatus() == EnumStatus.VOLTOOID ||
                     report.getStatus() == EnumStatus.GEANNULEERD ||
                     report.getStatus() == EnumStatus.WORDT_NIET_UITGEVOERD
                     )
