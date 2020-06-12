@@ -3,6 +3,9 @@ package edu.ap.facilitytoolspringboot.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document(collection = "Users")
 public class User {
     @Id
@@ -13,11 +16,10 @@ public class User {
     private String password;
     private String accessToken;
     private Boolean notification;
-
+    private List<String> assignedReportsId;
 
 
     public User(String id, String name,String role,String email, String password, String accessToken) {
-
         this.id = id;
         this.name = name;
         this.email = email;
@@ -28,7 +30,7 @@ public class User {
     }
 
     public User() {
-
+        assignedReportsId = new ArrayList<>();
     }
 
     public User(String id) {
@@ -97,4 +99,19 @@ public class User {
         this.notification = notification;
     }
 
+    public List<String> getAssignedReportsId() {
+        return assignedReportsId;
+    }
+
+    public void setAssignedReportsId(List<String> assignedReportsId) {
+        this.assignedReportsId = assignedReportsId;
+    }
+
+    public boolean isReportAlreadyAssigned(String reportId) {
+        List<String> allReportIds = new ArrayList<>();
+        for (String repId : assignedReportsId ) {
+            allReportIds.add(repId);
+        }
+        return allReportIds.contains(reportId);
+    }
 }

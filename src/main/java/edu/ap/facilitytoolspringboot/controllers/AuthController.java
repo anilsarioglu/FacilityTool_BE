@@ -1,102 +1,90 @@
 package edu.ap.facilitytoolspringboot.controllers;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.ap.facilitytoolspringboot.exception.ResourceNotFoundException;
 import edu.ap.facilitytoolspringboot.models.User;
-import edu.ap.facilitytoolspringboot.repositories.UserRepository;
 import edu.ap.facilitytoolspringboot.security.CurrentUser;
 import edu.ap.facilitytoolspringboot.security.UserPrincipal;
-import edu.ap.facilitytoolspringboot.security.oauth2.CustomOAuth2UserService;
+import edu.ap.facilitytoolspringboot.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.*;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import javax.ws.rs.GET;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(path = "/api")
 public class AuthController {
+    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+
+    private UserService userService;
 
     @Autowired
-    private ObjectMapper objectMapper;
-    private final RestTemplate restTemplate;
-
-    private UserRepository userRepository;
-
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
-
-    @Autowired
-    public AuthController(RestTemplateBuilder restTemplateBuilder, UserRepository userRepository) {
-    this.restTemplate = restTemplateBuilder.build();
-    this.userRepository = userRepository;
-}
-
-
-    @GetMapping("/user/me")
-    public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-        return userRepository.findById(userPrincipal.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    public AuthController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> getAllUsers() {
+        try {
+            List<User> users = userService.getAll();
+            if (users.isEmpty()) {
+                LOG.info("There are no users to return");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned all users");
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the users", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-
+    @GetMapping("/user/me")
+    public ResponseEntity<User> getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        try {
+            User currentUser = userService.getCurrentUser(userPrincipal);
+            if (currentUser == null) {
+                LOG.info("There is no currentUser");
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            LOG.info("Returned the currentUser");
+            return new ResponseEntity<>(currentUser, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't return the employee", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("/role/{id}")
-    public User updateRole(@PathVariable String id, @RequestBody User updateForm) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user;
-
-        if (optionalUser.isPresent()) {
-            user = optionalUser.get();
-        } else {
-            userRepository.save(updateForm);
-            return updateForm;
-        }
+    public ResponseEntity<User> updateRole(@PathVariable String id, @RequestBody User updatedUser) {
         try {
-            String role = updateForm.getRole();
-            if (!role.equals(user.getRole())) {
-                user.setRole(role);
-            }
-            userRepository.save(user);
-            return user;
-        } catch (Exception ex) {
-            return user;
+            User user = userService.updateRole(id, updatedUser);
+            LOG.info("User with id: {} updated/created successfully", id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error("Couldn't update/create the user with id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
-
-
     @PutMapping("/role-delete/{id}")
-    public User removeRole(@PathVariable String id ) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user;
-
-        if (optionalUser.isPresent()) {
-            user = optionalUser.get();
-        } else {
-            return null;
-        }
+    public ResponseEntity<User> removeRole(@PathVariable String id ) {
         try {
-            user.setRole("Medewerker");
-            userRepository.save(user);
-            return user;
-        } catch (Exception ex) {
-            return null;
+            User user = userService.removeRole(id);
+            if (user != null) {
+                LOG.info("User with id: {} updated/created successfully", id);
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                LOG.info("There is no user with the id: {}", id);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            LOG.error("Couldn't remove the role of the user with id: {}", id, e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
