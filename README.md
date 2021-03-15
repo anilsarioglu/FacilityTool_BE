@@ -1,4 +1,4 @@
-# Facility Tool - Back-end
+# Facility Tool - Back-end (JAVA Spring Boot)
 ### Back-end of the school project: Facility Tool
 
 Ons team heeft een platform ontwikkeld dat beschikbaar is op diverse toestellen zodat de medewerkers van AP op een efficiënte en makkelijke manier verschillende defecten kunnen melden. Via dit platform kunnen er ook opdrachten zoals een lokaal schilderen, een lokaal herinrichten etc. gegeven worden. Bij het vorige systeem werden er vaak meldingen of informatie vergeten omdat dit mondeling, via mail of telefonisch werd doorgegeven. Het doel van het platform is om meldingen zoals eerder vermeld als administrator beter te kunnen opvolgen, zorgen dat er geen informatie verloren gaat en natuurlijk het zo efficiënt mogelijk te maken. Het platform zal toegankelijk zijn voor iedere AP-medewerker. 
